@@ -1,38 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-*{
+* {
     font-family: 'inter', sans-serif;
-    margin: 0%; /*remove a margem padrão*/
-    box-sizing: border-box; /*Define o tamanho estavel do site evitando que o padding e o border quebrem as medidas*/
+    margin: 0%;
+    /*remove a margem padrão*/
+    box-sizing: border-box;
+    /*Define o tamanho estavel do site evitando que o padding e o border quebrem as medidas*/
 }
 
-.header{
+.header {
     background-color: black;
     width: 100%;
     right: 80%;
-    padding: 20px; /*Ajusta o espaço dentro do header*/
+    padding: 20px;
+    /*Ajusta o espaço dentro do header*/
 }
 
-.header nav{
-    display: flex; /*Prepara o terreno para centralizar*/
-    align-items: center; /*Alinha verticalmente(Deitado) os itens no centro*/
-    justify-content: space-between; /*Alinha horizontal(em pé) os itens no centro*/
-    
+.header nav {
+    display: flex;
+    /*Prepara o terreno para centralizar*/
+    align-items: center;
+    /*Alinha verticalmente(Deitado) os itens no centro*/
+    justify-content: space-between;
+    /*Alinha horizontal(em pé) os itens no centro*/
+
 }
-.header a{
-    text-decoration: none; /*Tira o sublinhado*/
+
+.header a {
+    text-decoration: none;
+    /*Tira o sublinhado*/
     color: white;
-    top: 0; /*faz a distancia do topo do navegador*/
-    position: sticky; /*Sticky faz o header grudar no topo*/
-    
+    top: 0;
+    /*faz a distancia do topo do navegador*/
+    position: sticky;
+    /*Sticky faz o header grudar no topo*/
+
 }
 
-.header img{
+.header img {
     width: 70px;
     right: 70px;
 }
-.header ul{
+
+.header ul {
     display: flex;
     gap: 35px;
 }
@@ -41,58 +52,73 @@
     background-color: white;
     color: black;
     border-radius: 20px;
-    padding: 10px; /*Tamanho do botão*/
-    font-weight: 750; /*Deixar o letramento mais groso*/
-    border: none; /*Tira a borda do botão*/
+    padding: 10px;
+    /*Tamanho do botão*/
+    font-weight: 750;
+    /*Deixar o letramento mais groso*/
+    border: none;
+    /*Tira a borda do botão*/
 }
 
 
-.header nav div{
+.header nav div {
     display: flex;
     gap: 20px;
 }
 
-.header div button:hover{ /*Hover serve para aplicar o efeito de transição*/
+.header div button:hover {
+    /*Hover serve para aplicar o efeito de transição*/
     background-color: gray;
     transition: 0.3s;
-    cursor: pointer; /*Quando passa o mouse em cima do botao vira a mão*/
+    cursor: pointer;
+    /*Quando passa o mouse em cima do botao vira a mão*/
 }
 
-.header ul a::after{ /*After faz um efeito de transição (O risquinho)*/
-    content: ""; /*Fala pro CSS que n tera texto*/         
-    position: absolute;   /*Permite posicionar o efeito com precisão*/
-    bottom: -4px; /*Tipo um gap, ajustar o espaçamento entre a linha e a letra*/     
-    left: 0;     /*Faz a linha surgir da esqueda*/         
-    width: 0;    /*Faz a linha ficar invizivel*/ 
-    height: 2px;      /*Define a grossura da linha*/    
+.header ul a::after {
+    /*After faz um efeito de transição (O risquinho)*/
+    content: "";
+    /*Fala pro CSS que n tera texto*/
+    position: absolute;
+    /*Permite posicionar o efeito com precisão*/
+    bottom: -4px;
+    /*Tipo um gap, ajustar o espaçamento entre a linha e a letra*/
+    left: 0;
+    /*Faz a linha surgir da esqueda*/
+    width: 0;
+    /*Faz a linha ficar invizivel*/
+    height: 2px;
+    /*Define a grossura da linha*/
     background-color: gray;
     transition: 0.3s;
 }
 
-.header ul a:hover::after{   
-    width: 100%; /*Faz o efeito de crescimento ao passar o mouse em cima*/
+.header ul a:hover::after {
+    width: 100%;
+    /*Faz o efeito de crescimento ao passar o mouse em cima*/
 }
 
 
 
-.tela1{
-    position: relative; /*O círculo e o conteúdo se posicionam dentro desta seção*/
+.tela1 {
+    position: relative;
+    /*O círculo e o conteúdo se posicionam dentro desta seção*/
     display: flex;
     height: 600px;
 }
 
-.esquerda{
+.esquerda {
     width: 50%;
     background-color: rgb(3, 17, 0);
 }
 
-.direita{
+.direita {
     width: 50%;
     background-color: rgb(7, 35, 0);
 }
 
-.conteudo{
-    position: absolute; /*Coloca o conteúdo por cima das duas cores*/
+.conteudo {
+    position: absolute;
+    /*Coloca o conteúdo por cima das duas cores*/
     top: 0;
     left: 0;
     width: 100%;
@@ -103,7 +129,7 @@
     padding: 40px 20%;
 }
 
-.conteudo > span{
+.conteudo>span {
     color: rgb(130, 195, 33);
     padding-bottom: 20px;
 }
@@ -122,19 +148,19 @@
     font-family: 'Bebas Neue', sans-serif;
 }
 
-.linha-divisoria{
+.linha-divisoria {
     border: none;
     height: 1px;
     background-color: rgba(255, 255, 255, 0.15);
     margin: 30px 0 20px;
 }
 
-.textos{
+.textos {
     display: flex;
     align-items: flex-end;
 }
 
-.texto-esq{
+.texto-esq {
     width: 50%;
     padding-right: 20%;
     font-size: 12px;
@@ -142,9 +168,10 @@
     color: rgb(159, 176, 166);
 }
 
-.texto-dir{
+.texto-dir {
     max-width: 350px;
     font-size: 15px;
     line-height: 1.5;
     color: white;
 }
+
