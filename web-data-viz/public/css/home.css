@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 *{
     font-family: 'inter', sans-serif;
@@ -74,6 +75,76 @@
 
 
 
+.tela1{
+    position: relative; /*O círculo e o conteúdo se posicionam dentro desta seção*/
+    display: flex;
+    height: 600px;
+}
 
+.esquerda{
+    width: 50%;
+    background-color: rgb(3, 17, 0);
+}
 
+.direita{
+    width: 50%;
+    background-color: rgb(7, 35, 0);
+}
 
+.conteudo{
+    position: absolute; /*Coloca o conteúdo por cima das duas cores*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 20%;
+}
+
+.conteudo > span{
+    color: rgb(130, 195, 33);
+    padding-bottom: 20px;
+}
+
+.conteudo h1 {
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 100px;
+    line-height: 0.85;
+    font-weight: 400;
+}
+
+.conteudo h1 span {
+    color: transparent;
+    -webkit-text-stroke: 1px white;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.linha-divisoria{
+    border: none;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.15);
+    margin: 30px 0 20px;
+}
+
+.textos{
+    display: flex;
+    align-items: flex-end;
+}
+
+.texto-esq{
+    width: 50%;
+    padding-right: 20%;
+    font-size: 12px;
+    line-height: 1.6;
+    color: rgb(159, 176, 166);
+}
+
+.texto-dir{
+    max-width: 350px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: white;
+}
