@@ -9,12 +9,22 @@
     /*Define o tamanho estavel do site evitando que o padding e o border quebrem as medidas*/
 }
 
+html {
+    scroll-padding-top: 110px;
+    /*Evita o header cobrir o título da tela ao rolar*/
+}
+
 .header {
     background-color: black;
     width: 100%;
-    right: 80%;
     padding: 20px;
     /*Ajusta o espaço dentro do header*/
+    position: sticky;
+    /*Sticky faz o header grudar no topo*/
+    top: 0;
+    /*Distância do topo do navegador*/
+    z-index: 100;
+    /*Deixa o header por cima das telas*/
 }
 
 .header nav {
@@ -31,21 +41,20 @@
     text-decoration: none;
     /*Tira o sublinhado*/
     color: white;
-    top: 0;
-    /*faz a distancia do topo do navegador*/
-    position: sticky;
-    /*Sticky faz o header grudar no topo*/
-
 }
 
 .header img {
     width: 70px;
-    right: 70px;
 }
 
 .header ul {
     display: flex;
     gap: 35px;
+}
+
+.header ul a {
+    position: relative;
+    /*Mantém o risquinho do hover no lugar certo, embaixo de cada link*/
 }
 
 .header button {
@@ -98,6 +107,8 @@
 }
 
 
+
+/*TELA 1*/
 
 .tela1 {
     position: relative;
@@ -177,14 +188,14 @@
 
 /*TELA 2*/
 
-.tela2{
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 60px;
-background-color: rgb(243, 240, 233);
-padding: 80px 60px;
-min-height: 600px;
+.tela2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    background-color: rgb(243, 240, 233);
+    padding: 80px 60px;
+    min-height: 600px;
 }
 
 .conteudo-tela2 h1 {
@@ -192,29 +203,41 @@ min-height: 600px;
     font-size: 60px;
     font-weight: 400;
     text-transform: uppercase;
-     margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
-.conteudo-tela2 h1 span{
+.conteudo-tela2 h1 span {
     font-family: 'Bebas Neue', sans-serif;
     color: rgb(51, 69, 18);
 }
 
-.conteudo-tela2 p{
-    font-size:25px;
-    color: rgb(70, 75, 80);
+.texto-tela2 {
     padding-left: 15px;
     border-left: 1px solid rgba(0, 0, 0, 0.3);
+    /*A barrinha fica no bloco todo, não em cada parágrafo*/
+}
+
+.texto-tela2 p {
+    font-size: 25px;
+    color: rgb(70, 75, 80);
+    margin-bottom: 25px;
+    /*Espaço entre os parágrafos (no lugar dos <br>)*/
+}
+
+.texto-tela2 p:last-child {
+    margin-bottom: 0;
 }
 
 .imgEu {
     width: 46%;
     flex-shrink: 0;
+    align-self: stretch;
+    /*A foto acompanha a altura do texto*/
 }
 
 .imgEu img {
     width: 100%;
-    height: 1100px;
+    height: 100%;
     object-fit: cover;
     display: block;
     border-radius: 20px;
@@ -315,7 +338,6 @@ min-height: 600px;
     color: rgb(130, 140, 150);
 }
 
-/* Efeito ao passar o mouse no card */
 .tela3-card:hover {
     background-color: rgba(217, 255, 50, 0.05);
 }
@@ -336,31 +358,30 @@ min-height: 600px;
 .conteudo-tela4 {
     display: flex;
     align-items: flex-end;
-    justify-content: flex-start;  /* ou center */
-    gap: 250px;                   /* aqui o gap manda */
+    justify-content: flex-start;
+    gap: 250px;
 }
 
 .conteudo-tela4 h1 {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 90px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 0.90;
-    max-width: 700px;      
-    gap: 2px;     
+    max-width: 700px;
 }
 
 .texto-tela4 {
-    max-width: 300px;        
+    max-width: 300px;
 }
 
 .conteudo-tela4 p {
     color: rgb(57, 60, 64);
-    margin-bottom: 15px;    
-    font-size: 18px;    
+    margin-bottom: 15px;
+    font-size: 18px;
 
 }
 
-.tela4-button{
+.tela4-button {
     font-family: 'Bebas Neue', sans-serif;
     background-color: black;
     color: white;
@@ -368,9 +389,93 @@ min-height: 600px;
     border-radius: 30px;
     padding: 20px;
     border: none;
-}
-.tela4-button:hover{
-     background-color: rgb(67, 67, 67);
     transition: 0.3s;
+}
+
+.tela4-button:hover {
+    background-color: rgb(67, 67, 67);
     cursor: pointer;
+}
+/*TELA 5*/
+.tela5{
+    background-color: rgb(243, 240, 233);
+    padding: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tela5-titulo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 60px;
+}
+
+.conteudo-tela5 p{
+    max-width: 900px;
+     margin-bottom: 15px;
+    font-size: 18px;
+    color: rgb(58, 58, 58);
+}
+.conteudo-tela5 button{
+    font-family: 'Bebas Neue', sans-serif;
+    background-color: black;
+     color: white;
+    font-size: 20px;
+    border-radius: 30px;
+    padding: 20px;
+    border: none;
+    transition: 0.3s;
+}
+.conteudo-tela5 button:hover{
+    background-color: rgb(53, 53, 53);
+     cursor: pointer;
+}
+/*TELA 6*/
+
+.tela6 {
+    background-color: rgb(13, 32, 26);
+    padding: 50px 60px;
+}
+
+.conteudo-tela6 {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.tela6-marca img {
+    display: block;
+    height: 60px;
+    width: auto;
+    margin-bottom: 12px;
+}
+
+.tela6-marca p {
+    font-size: 13px;
+    color: rgb(130, 150, 140);
+}
+
+.tela6-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    padding: 0;
+}
+
+.tela6-links a {
+    color: rgb(167, 167, 167);
+    text-decoration: none;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.tela6-links a:hover {
+    color: rgb(255, 255, 255);
+}
+
+.tela6-copy {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgb(130, 150, 140);
 }
