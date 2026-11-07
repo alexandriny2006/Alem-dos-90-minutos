@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+* {
+    font-family: 'inter', sans-serif;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+.principal {
+    display: flex;
+    min-height: 100vh;
+}
+
+.esquerda,
+.direita {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px;
+}
+
+.esquerda {
+    background-color: rgb(0, 26, 0);
+}
+
+.esquerda h1 {
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 100px;
+    line-height: 0.85;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.esquerda h1 span {
+    color: transparent;
+    -webkit-text-stroke: 1px white;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.esquerda-conteudo {
+    color: white;
+}
+
+.esquerda-conteudo p {
+    max-width: 400px;
+    margin-top: 30px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgb(159, 176, 166);
+}
+
+.direita {
+    background-color: rgb(255, 251, 246);
+    align-items: center;
+}
+
+.direita-conteudo {
+    width: 100%;
+    max-width: 420px;
+}
+
+.direita h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 1;
+    text-transform: uppercase;
+    color: rgb(20, 22, 20);
+}
+
+.direita p {
+    font-size: 14px;
+    color: rgb(70, 75, 80);
+    margin: 8px 0 30px;
+}
+
+/* ---------- Campos (dentro de .direita-conteudo) ---------- */
+.direita-conteudo label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgb(20, 22, 20);
+    margin-bottom: 8px;
+}
+
+.direita-conteudo input {
+    display: block;
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.direita-conteudo input:focus {
+    border-color: rgb(83, 115, 24);
+    background-color: white;
+}
+
+/* ---------- Botão ---------- */
+.botao-cadastro {
+    display: block;
+    width: 100%;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.botao-cadastro:hover {
+    background-color: rgb(67, 67, 67);
+}
+
+/* ---------- Link "Fazer login" / "Crie uma" ---------- */
+.direita .troca {
+    margin: 25px 0 0;
+    text-align: center;
+}
+
+.direita .troca a {
+    color: rgb(0, 57, 4);
+    font-weight: 700;
+    text-decoration: none;
+}
