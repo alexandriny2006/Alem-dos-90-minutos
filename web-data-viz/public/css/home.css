@@ -432,7 +432,7 @@ html {
 /*TELA 6*/
 
 .tela6 {
-    background-color: rgb(13, 32, 26);
+    background-color: rgb(0, 0, 0);
     padding: 50px 60px;
 }
 
@@ -442,7 +442,7 @@ html {
     justify-content: space-between;
     gap: 40px;
 }
-
+x
 .tela6-marca img {
     display: block;
     height: 60px;
@@ -452,7 +452,7 @@ html {
 
 .tela6-marca p {
     font-size: 13px;
-    color: rgb(130, 150, 140);
+    color: rgb(147, 147, 147);
 }
 
 .tela6-links {
@@ -477,5 +477,5 @@ html {
     font-size: 11px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: rgb(130, 150, 140);
+    color: rgb(150, 150, 150);
 }

@@ -1,0 +1,306 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+* {
+    font-family: 'inter', sans-serif;
+    margin: 0%;
+    /*remove a margem padrão*/
+    box-sizing: border-box;
+    /*Define o tamanho estavel do site evitando que o padding e o border quebrem as medidas*/
+}
+
+html {
+    scroll-padding-top: 110px;
+    /*Evita o header cobrir o título da tela ao rolar*/
+}
+
+.header {
+    background-color: black;
+    width: 100%;
+    padding: 20px;
+    /*Ajusta o espaço dentro do header*/
+    position: sticky;
+    /*Sticky faz o header grudar no topo*/
+    top: 0;
+    /*Distância do topo do navegador*/
+    z-index: 100;
+    /*Deixa o header por cima das telas*/
+}
+
+.header nav {
+    display: flex;
+    /*Prepara o terreno para centralizar*/
+    align-items: center;
+    /*Alinha verticalmente(Deitado) os itens no centro*/
+    justify-content: space-between;
+    /*Alinha horizontal(em pé) os itens no centro*/
+
+}
+
+.header a {
+    text-decoration: none;
+    /*Tira o sublinhado*/
+    color: white;
+}
+
+.header img {
+    width: 70px;
+}
+
+.header ul {
+    display: flex;
+    gap: 35px;
+}
+
+.header ul a {
+    position: relative;
+    /*Mantém o risquinho do hover no lugar certo, embaixo de cada link*/
+}
+
+.header button {
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+    padding: 10px;
+    /*Tamanho do botão*/
+    font-weight: 750;
+    /*Deixar o letramento mais groso*/
+    border: none;
+    /*Tira a borda do botão*/
+}
+
+
+.header nav div {
+    display: flex;
+    gap: 20px;
+}
+
+.header div button:hover {
+    /*Hover serve para aplicar o efeito de transição*/
+    background-color: gray;
+    transition: 0.3s;
+    cursor: pointer;
+    /*Quando passa o mouse em cima do botao vira a mão*/
+}
+
+.header ul a::after {
+    /*After faz um efeito de transição (O risquinho)*/
+    content: "";
+    /*Fala pro CSS que n tera texto*/
+    position: absolute;
+    /*Permite posicionar o efeito com precisão*/
+    bottom: -4px;
+    /*Tipo um gap, ajustar o espaçamento entre a linha e a letra*/
+    left: 0;
+    /*Faz a linha surgir da esqueda*/
+    width: 0;
+    /*Faz a linha ficar invizivel*/
+    height: 2px;
+    /*Define a grossura da linha*/
+    background-color: gray;
+    transition: 0.3s;
+}
+
+.header ul a:hover::after {
+    width: 100%;
+    /*Faz o efeito de crescimento ao passar o mouse em cima*/
+}
+
+/*ABERTURA*/
+
+.tela-time {
+    background-color: rgb(243, 240, 233);
+    padding: 100px 20px 60px;
+}
+
+.conteudo-tela-time {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.tela-time-etapa {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgb(83, 115, 24);
+    margin-bottom: 20px;
+}
+
+.conteudo-tela-time h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 100px;
+    font-weight: 400;
+    line-height: 0.9;
+    text-transform: uppercase;
+    color: rgb(20, 22, 20);
+    margin-bottom: 40px;
+}
+
+.conteudo-tela-time h2 span {
+    font-family: 'Bebas Neue', sans-serif;
+    color: rgb(83, 115, 24);
+    font-style: italic;
+}
+
+.tela-time-texto {
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+.tela-time-texto p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: rgb(70, 75, 80);
+    margin-bottom: 20px;
+}
+
+/*FAMÍLIA*/
+
+.familia {
+    background-color: rgb(243, 240, 233);
+    padding: 60px 20px 100px;
+}
+
+.familia-container {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.familia-foto {
+    flex-shrink: 0;
+    /*Impede a foto de encolher*/
+}
+
+.familia-foto img {
+    width: 400px;
+    height: 480px;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+}
+
+.conteudo-familia {
+    flex: 1;
+}
+
+.conteudo-familia h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: rgb(20, 22, 20);
+    margin-bottom: 30px;
+}
+
+.conteudo-familia p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgb(70, 75, 80);
+    margin-bottom: 20px;
+}
+
+/*AMIGOS*/
+
+.amigos {
+    background-color: rgb(20, 22, 20);
+    padding: 100px 20px;
+}
+
+.amigos-container {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.conteudo-amigos {
+    flex: 1;
+}
+
+.conteudo-amigos h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.conteudo-amigos p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgb(190, 198, 195);
+    margin-bottom: 20px;
+}
+
+.amigos-foto {
+    flex-shrink: 0;
+}
+
+.amigos-foto img {
+    width: 400px;
+    height: 580px;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+}
+
+.tela6 {
+    background-color: rgb(0, 0, 0);
+    padding: 50px 60px;
+}
+
+.conteudo-tela6 {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.tela6-marca img {
+    display: block;
+    height: 60px;
+    width: auto;
+    margin-bottom: 12px;
+}
+
+.tela6-marca p {
+    font-size: 13px;
+    color: rgb(147, 147, 147);
+}
+
+.tela6-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    padding: 0;
+}
+
+.tela6-links a {
+    color: rgb(167, 167, 167);
+    text-decoration: none;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.tela6-links a:hover {
+    color: rgb(255, 255, 255);
+}
+
+.tela6-copy {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgb(150, 150, 150);
+}
+
+
+
