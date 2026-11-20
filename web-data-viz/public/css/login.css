@@ -121,6 +121,23 @@
     transition: 0.3s;
 }
 
+.voltar button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     width: 50px;
+    height: 25px;
+    border-radius: 15px;  
+    transition: 0.3s;
+    cursor: pointer;
+    top: 50px;
+    position: absolute;
+    font-size: 28px;
+}
+.voltar button:hover{
+    background-color: rgb(166, 166, 166);
+}
+
 .botao-cadastro:hover {
     background-color: rgb(67, 67, 67);
 }
