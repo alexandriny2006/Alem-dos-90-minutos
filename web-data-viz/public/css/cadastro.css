@@ -139,6 +139,7 @@
     top: 50px;
     position: absolute;
     font-size: 38px;
+    border: none;
 }
 .voltar button:hover{
     background-color: rgb(166, 166, 166);
