@@ -1,69 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-/* ========== CORES (as mesmas da tela principal) ========== */
+/* CORES */
 :root {
-  --verde-escuro: rgb(3, 17, 0);
-  --verde-escuro-2: rgb(7, 35, 0);
-  --oliva: rgb(51, 69, 18);
-  --verde: rgb(130, 195, 33);
-  --lima: rgb(217, 255, 50);
-  --verde-vivo: rgb(152, 255, 56);
-  --creme: rgb(243, 240, 233);
-  --superficie: rgb(250, 248, 243);
-  --preto: rgb(20, 22, 20);
-  --texto: rgb(70, 75, 80);
-  --cinza-verde: rgb(159, 176, 166);
-  --linha: rgba(0, 0, 0, 0.12);
+    --verde-escuro: rgb(3, 17, 0);
+    --verde-escuro-2: rgb(7, 35, 0);
+    --oliva: rgb(51, 69, 18);
+    --verde: rgb(130, 195, 33);
+    --lima: rgb(217, 255, 50);
+    --verde-vivo: rgb(152, 255, 56);
+    --creme: rgb(243, 240, 233);
+    --superficie: rgb(250, 248, 243);
+    --preto: rgb(20, 22, 20);
+    --texto: rgb(70, 75, 80);
+    --cinza-verde: rgb(159, 176, 166);
+    --linha: rgba(0, 0, 0, 0.12);
 }
 
+/* CONFIGURAÇÕES GERAIS */
 * {
-    font-family: 'inter', sans-serif;
-    margin: 0%;
-    /*remove a margem padrão*/
+    font-family: 'Inter', sans-serif;
+    margin: 0;
     box-sizing: border-box;
-    /*Define o tamanho estavel do site evitando que o padding e o border quebrem as medidas*/
 }
-
-
 
 body {
-  background-color: rgb(243, 240, 233);
+    background-color: rgb(243, 240, 233);
 }
 
-
+/* CABEÇALHO */
 .header {
     display: grid;
-     grid-template-columns: 1fr auto 1fr; /* 3 colunas: esquerda (logo) | meio (links) | direita (vazia) */
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
+    justify-content: center;
+
     background-color: black;
     width: 100%;
     padding: 20px;
-    /*Ajusta o espaço dentro do header*/
+
     position: sticky;
-    /*Sticky faz o header grudar no topo*/
     top: 0;
-    /*Distância do topo do navegador*/
     z-index: 100;
-    /*Deixa o header por cima das telas*/
-    justify-content: center;
-    align-items: center;
 }
 
 .header nav {
     display: flex;
-    /*Prepara o terreno para centralizar*/
     align-items: center;
-    /*Alinha verticalmente(Deitado) os itens no centro*/
     justify-content: space-between;
-    /*Alinha horizontal(em pé) os itens no centro*/
-
 }
 
 .header a {
-    
     text-decoration: none;
-    /*Tira o sublinhado*/
     color: white;
 }
 
@@ -79,7 +67,6 @@ body {
 
 .header ul a {
     position: relative;
-    /*Mantém o risquinho do hover no lugar certo, embaixo de cada link*/
 }
 
 .header button {
@@ -87,13 +74,9 @@ body {
     color: black;
     border-radius: 20px;
     padding: 10px;
-    /*Tamanho do botão*/
     font-weight: 750;
-    /*Deixar o letramento mais groso*/
     border: none;
-    /*Tira a borda do botão*/
 }
-
 
 .header nav div {
     display: flex;
@@ -101,399 +84,292 @@ body {
 }
 
 .header div button:hover {
-    /*Hover serve para aplicar o efeito de transição*/
     background-color: gray;
     transition: 0.3s;
     cursor: pointer;
-    /*Quando passa o mouse em cima do botao vira a mão*/
 }
 
+/* EFEITO DA LINHA NOS LINKS */
 .header ul a::after {
-    /*After faz um efeito de transição (O risquinho)*/
     content: "";
-    /*Fala pro CSS que n tera texto*/
     position: absolute;
-    /*Permite posicionar o efeito com precisão*/
     bottom: -4px;
-    /*Tipo um gap, ajustar o espaçamento entre a linha e a letra*/
     left: 0;
-    /*Faz a linha surgir da esqueda*/
     width: 0;
-    /*Faz a linha ficar invizivel*/
     height: 2px;
-    /*Define a grossura da linha*/
     background-color: gray;
     transition: 0.3s;
 }
 
 .header ul a:hover::after {
     width: 100%;
-    /*Faz o efeito de crescimento ao passar o mouse em cima*/
 }
 
-
-/* ========== TÍTULO ========== */
+/* TÍTULO */
 .container h1 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 56px;
-  font-weight: 400;
-  line-height: 1;
-  text-transform: uppercase;
-  color: var(--verde-escuro-2);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    font-weight: 400;
+    line-height: 1;
+    text-transform: uppercase;
 }
 
 .container > .sub {
-  color: var(--texto);
-  margin: 8px 0 28px;
+    color: black;
+    margin: 8px 0 28px;
 }
 
-/* ========== KPIs ========== */
+/* KPIs */
 .kpis {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
 }
 
 .kpi {
-  background: var(--superficie);
-  border: 1px solid var(--linha);
-  border-radius: 16px;
-  padding: 20px 22px;
+    background: white;
+    border-radius: 16px;
+    padding: 20px 22px;
 }
 
 .kpi .num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 56px;
-  line-height: 1;
-  color: var(--oliva);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    line-height: 1;
 }
 
 .kpi .num.texto {
-  font-size: 40px;
-  padding: 8px 0 4px;
+    font-size: 40px;
+    padding: 8px 0 4px;
 }
 
 .kpi p {
-  margin-top: 6px;
-  color: var(--texto);
+    margin-top: 6px;
 }
 
 .kpi small {
-  display: block;
-  margin-top: 6px;
-  color: var(--oliva);
-  font-weight: 600;
+    display: block;
+    margin-top: 6px;
+    font-weight: 600;
 }
 
-/* ========== PÁGINA ========== */
+/* PÁGINA */
 .container {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 48px 20px 64px;
-}
-
-.panel .sub {
-  margin: 6px 0 24px;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 48px 20px 64px;
 }
 
 .panel {
-  background: var(--superficie);
-  border: 1px solid var(--linha);
-  border-radius: 20px;
-  padding: 32px;
-  margin-bottom: 24px;
-}
-
-.panel h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 42px;
-  font-weight: 400;
-  line-height: 1;
-  text-transform: uppercase;
-  color: var(--preto);
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 24px;
 }
 
 .panel .sub {
-  color: var(--texto);
+    margin: 6px 0 24px;
 }
 
-/* painel escuro (habilidades) */
+.panel h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 1;
+    text-transform: uppercase;
+    color: black;
+}
+
+/* PAINEL ESCURO */
 .panel.escuro {
-  background: var(--preto);
-  border-color: transparent;
+    background: black;
+    border-color: transparent;
 }
 
 .escuro h2 {
-  color: white;
+    color: white;
 }
 
 .escuro .sub {
-  color: var(--cinza-verde);
+    color: rgb(255, 255, 255);
 }
 
-/* ========== QUADRADOS (significado e competências) ========== */
+/* QUADRADOS */
 .row {
-  display: grid;
-  grid-template-columns: 26px 1fr;
-  gap: 14px;
-  align-items: center;
-  padding: 10px 0;
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    gap: 14px;
+    align-items: center;
+    padding: 10px 0;
 }
 
-.row + .row {
-  border-top: 1px solid var(--linha);
-}
 
 .row label {
-  font-size: 16px;
-  color: var(--preto);
-  cursor: pointer;
+    font-size: 16px;
+    color: black;
+    cursor: pointer;
 }
 
-input[type="checkbox"],
-input[type="radio"] {
-  -webkit-appearance: none;
-  appearance: none;          /* tira o visual padrão e deixa quadrado */
-  width: 24px;
-  height: 24px;
-  border: 2px solid var(--oliva);
-  border-radius: 6px;
-  background: white;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-input[type="checkbox"]:checked,
-input[type="radio"]:checked {
-  background: var(--oliva);              /* pinta o quadrado */
-  box-shadow: inset 0 0 0 3px white;
-}
-
-input[type="checkbox"]:disabled,
-input[type="radio"]:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-:focus-visible {
-  outline: 2px solid var(--verde);
-  outline-offset: 2px;
-}
-
-/* ========== GRÁFICOS (Chart.js) ========== */
+/* GRÁFICOS */
 .grafico {
-  position: relative;
-  height: 340px;      /* o Chart.js precisa de uma altura definida */
+    position: relative;
+    height: 340px;
 }
 
 #sigBloco {
-  display: none;      /* só aparece depois de enviar */
-  margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid var(--linha);
+    display: none;
+    margin-top: 28px;
+    padding-top: 24px;
 }
 
 #sigBloco .grafico {
-  height: 280px;
+    height: 280px;
 }
 
 .nota {
-  margin-top: 10px;
-  font-size: 13px;
-  color: var(--texto);
+    margin-top: 10px;
+    font-size: 13px;
+    color: black;
 }
 
-/* ========== BOTÕES ========== */
-.btn {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px;
-  background-color: var(--preto);
-  color: white;
-  border: 2px solid var(--preto);
-  border-radius: 30px;
-  padding: 12px 26px;
-  cursor: pointer;
-  transition: 0.3s;
+/* BOTÕES */
+.button {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+    border-radius: 30px;
+    padding: 12px 26px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.btn:hover {
-  background-color: rgb(53, 53, 53);
-  border-color: rgb(53, 53, 53);
-}
-
-.btn.contorno {
-  background: transparent;
-  color: var(--preto);
-}
-
-.btn.contorno:hover {
-  background: rgba(0, 0, 0, 0.07);
-  border-color: var(--preto);
-}
-
-.btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.button:hover {
+    background-color: rgb(53, 53, 53);
+    border-color: rgb(53, 53, 53);
 }
 
 .acoes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
 }
 
-/* botão do painel escuro */
-.escuro .btn {
-  background: var(--lima);
-  border-color: var(--lima);
-  color: black;
+/* BOTÃO DO PAINEL ESCURO */
+.escuro .button {
+    background-color: rgb(255, 255, 255);
+    color: black;
 }
 
-.escuro .btn:hover {
-  background: var(--verde-vivo);
-  border-color: var(--verde-vivo);
+.escuro .button:hover {
+    background: rgb(194, 194, 194);
 }
 
-/* ========== AVISOS ========== */
+/* AVISOS */
 .aviso {
-  display: none;
-  background: rgba(130, 195, 33, 0.18);
-  color: var(--oliva);
-  border-radius: 12px;
-  padding: 12px 16px;
-  margin-top: 16px;
+    display: none;
+    background: rgba(130, 195, 33, 0.18);
+    color: var(--oliva);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-top: 16px;
 }
 
-.aviso p {
-  color: var(--oliva);
-}
 
 .escuro .aviso {
-  background: rgba(217, 255, 50, 0.1);
-  color: var(--lima);
+    background: rgba(217, 255, 50, 0.1);
+    color: greenyellow;
 }
 
-/* ========== HABILIDADES ========== */
+/* HABILIDADES */
 .skills {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
 }
 
 .campos {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4px 28px;
-  margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 28px;
+    margin-bottom: 24px;
 }
 
-.hab {
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 12px 0 14px;
-  transition: 0.3s;
-}
-
-.hab:focus-within {
-  border-top-color: var(--lima);
-}
 
 .hab label {
-  display: block;
-  font-size: 13px;
-  color: var(--cinza-verde);
+    display: block;
+    font-size: 13px;
+    color: rgb(145, 145, 145);
 }
 
 .hab input {
-  display: block;
-  width: 100%;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 46px;
-  line-height: 1.1;
-  color: var(--lima);
-  -moz-appearance: textfield;
-  appearance: textfield;
+    /* width: 100%; */
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 46px;
+    color: greenyellow;
 }
 
 .hab input::placeholder {
-  color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.2);
 }
 
 .hab input::-webkit-inner-spin-button,
 .hab input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    appearance: none;
 }
 
-.hab-barra {
-  height: 4px;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.12);
-  overflow: hidden;
-}
-
-.hab-barra i {
-  display: block;
-  width: 0;
-  height: 100%;
-  background: var(--lima);
-  transition: width 0.3s;
-}
-
-/* ========== COMPETÊNCIAS ========== */
+/* COMPETÊNCIAS */
 .comp {
-  display: grid;
-  grid-template-columns: 1fr 1.3fr;
-  gap: 32px;
-  align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 32px;
+    align-items: center;
 }
 
-/* ========== COMENTÁRIO ========== */
+/* COMENTÁRIO */
 textarea {
-  width: 100%;
-  min-height: 110px;
-  resize: vertical;
-  padding: 14px 16px;
-  color: var(--preto);
-  background: white;
-  border: 1px solid var(--linha);
-  border-radius: 14px;
+    width: 100%;
+    min-height: 110px;
+    resize: vertical;
+    padding: 14px 16px;
+    color: black;
+    border-radius: 14px;
 }
 
 textarea:focus {
-  outline: none;
-  border-color: var(--oliva);
+    outline: none;
 }
 
 .cnt {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 12px;
-  color: var(--texto);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    color: black;
 }
 
+/* LISTA DE COMENTÁRIOS (onde o comentário publicado aparece) */
 #cLista2 {
-  margin-top: 24px;
+    margin-top: 24px;
 }
 
 .cm {
-  border-top: 1px solid var(--linha);
-  padding: 14px 0;
-  color: var(--preto);
+    border-top: 1px solid;
+    padding: 14px 0;
 }
 
 .cm small {
-  color: var(--texto);
-  margin-left: 8px;
+    color: black;
+    margin-left: 8px;
 }
 
 .vazio {
-  color: var(--texto);
+    color: black;
 }
-

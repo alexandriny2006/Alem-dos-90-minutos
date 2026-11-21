@@ -26,6 +26,7 @@
       <h1>Meu painel</h1>
       <p class="sub">Veja como a comunidade se enxerga e atualize seu perfil</p>
 
+      <!-- ========== 3 KPIs ========== -->
       <section class="kpis" aria-label="Indicadores">
         <div class="kpi">
           <div class="num" id="k1">–</div>
@@ -46,6 +47,7 @@
         </div>
       </section>
 
+      <!-- ========== SIGNIFICADO ========== -->
       <section class="panel">
         <h2>O que isso significa para você?</h2>
         <p class="sub">
@@ -53,55 +55,59 @@
           um significado.
         </p>
 
-        <div>
-          <div class="row">
-            <input type="radio" name="significado" id="s0" />
-            <label for="s0">Autoconhecimento</label>
-          </div>
-          <div class="row">
-            <input type="radio" name="significado" id="s1" />
-            <label for="s1">Crescimento profissional</label>
-          </div>
-          <div class="row">
-            <input type="radio" name="significado" id="s2" />
-            <label for="s2">Propósito</label>
-          </div>
-          <div class="row">
-            <input type="radio" name="significado" id="s3" />
-            <label for="s3">Conexão com pessoas</label>
-          </div>
-          <div class="row">
-            <input type="radio" name="significado" id="s4" />
-            <label for="s4">Liberdade</label>
-          </div>
-        </div>
+        <div class="comp">
+          <!-- ESQUERDA: as opções e os botões -->
+          <div>
+            <div class="row">
+              <input type="radio" name="significado" id="s0" />
+              <label for="s0">Autoconhecimento</label>
+            </div>
+            <div class="row">
+              <input type="radio" name="significado" id="s1" />
+              <label for="s1">Crescimento profissional</label>
+            </div>
+            <div class="row">
+              <input type="radio" name="significado" id="s2" />
+              <label for="s2">Propósito</label>
+            </div>
+            <div class="row">
+              <input type="radio" name="significado" id="s3" />
+              <label for="s3">Conexão com pessoas</label>
+            </div>
+            <div class="row">
+              <input type="radio" name="significado" id="s4" />
+              <label for="s4">Liberdade</label>
+            </div>
 
-        <div class="acoes">
-          <button
-            class="btn"
-            id="sigBtn"
-            type="button"
-            onclick="enviarSignificado()"
-          >
-            Enviar
-          </button>
-          <button
-            class="btn contorno"
-            type="button"
-            onclick="redefinirSignificado()"
-          >
-            Redefinir
-          </button>
-        </div>
-        <p class="aviso" id="sigAviso">
-          Voto enviado. Para trocar, clique em redefinir.
-        </p>
-
-        <div id="sigBloco">
-          <div class="grafico">
-            <canvas id="sigCanvas"></canvas>
+            <div class="acoes">
+              <button
+                class="button"
+                id="sigbutton"
+                type="button"
+                onclick="enviarSignificado()"
+              >
+                Enviar
+              </button>
+              <button
+                class="button contorno"
+                type="button"
+                onclick="redefinirSignificado()"
+              >
+                Redefinir
+              </button>
+            </div>
+            <p class="aviso" id="sigAviso">
+              Voto enviado. Para trocar, clique em redefinir.
+            </p>
           </div>
-          <p class="nota">A coluna mais escura é o seu voto.</p>
+
+          <!-- DIREITA: o gráfico (sempre visível) -->
+          <div>
+            <div class="grafico">
+              <canvas id="sigCanvas"></canvas>
+            </div>
+            <p class="nota">A coluna mais escura é o seu voto.</p>
+          </div>
         </div>
       </section>
 
@@ -118,103 +124,39 @@
             <div class="campos">
               <div class="hab">
                 <label for="h0">Velocidade</label>
-                <input
-                  type="number"
-                  id="h0"
-                  min="0"
-                  max="100"
-                  placeholder="0"
-                  oninput="mudouHabilidade()"
-                />
-                <div class="hab-barra"><i id="hb0"></i></div>
+                <input type="number" id="h0" min="0" max="100" placeholder="0" oninput="mudouHabilidade()" />
               </div>
               <div class="hab">
                 <label for="h1">Finalização</label>
-                <input
-                  type="number"
-                  id="h1"
-                  min="0"
-                  max="100"
-                  placeholder="0"
-                  oninput="mudouHabilidade()"
-                />
-                <div class="hab-barra"><i id="hb1"></i></div>
+                <input type="number" id="h1" min="0" max="100" placeholder="0" oninput="mudouHabilidade()" />
               </div>
               <div class="hab">
                 <label for="h2">Passe</label>
-                <input
-                  type="number"
-                  id="h2"
-                  min="0"
-                  max="100"
-                  placeholder="0"
-                  oninput="mudouHabilidade()"
-                />
-                <div class="hab-barra"><i id="hb2"></i></div>
+                <input type="number" id="h2" min="0" max="100" placeholder="0" oninput="mudouHabilidade()" />
               </div>
               <div class="hab">
                 <label for="h3">Drible</label>
-                <input
-                  type="number"
-                  id="h3"
-                  min="0"
-                  max="100"
-                  placeholder="0"
-                  oninput="mudouHabilidade()"
-                />
-                <div class="hab-barra"><i id="hb3"></i></div>
+                <input type="number" id="h3" min="0" max="100" placeholder="0" oninput="mudouHabilidade()" />
               </div>
               <div class="hab">
                 <label for="h4">Defesa</label>
-                <input
-                  type="number"
-                  id="h4"
-                  min="0"
-                  max="100"
-                  placeholder="0"
-                  oninput="mudouHabilidade()"
-                />
-                <div class="hab-barra"><i id="hb4"></i></div>
+                <input type="number" id="h4" min="0" max="100" placeholder="0" oninput="mudouHabilidade()" />
               </div>
               <div class="hab">
                 <label for="h5">Força</label>
-                <input
-                  type="number"
-                  id="h5"
-                  min="0"
-                  max="100"
-                  placeholder="0"
-                  oninput="mudouHabilidade()"
-                />
-                <div class="hab-barra"><i id="hb5"></i></div>
+                <input type="number" id="h5" min="0" max="100" placeholder="0" oninput="mudouHabilidade()" />
               </div>
               <div class="hab">
                 <label for="h6">Visão de jogo</label>
-                <input
-                  type="number"
-                  id="h6"
-                  min="0"
-                  max="100"
-                  placeholder="0"
-                  oninput="mudouHabilidade()"
-                />
-                <div class="hab-barra"><i id="hb6"></i></div>
+                <input type="number" id="h6" min="0" max="100" placeholder="0" oninput="mudouHabilidade()" />
               </div>
               <div class="hab">
                 <label for="h7">Resistência</label>
-                <input
-                  type="number"
-                  id="h7"
-                  min="0"
-                  max="100"
-                  placeholder="0"
-                  oninput="mudouHabilidade()"
-                />
-                <div class="hab-barra"><i id="hb7"></i></div>
+                <input type="number" id="h7" min="0" max="100" placeholder="0" oninput="mudouHabilidade()" />
               </div>
             </div>
 
-            <button class="btn" type="button" onclick="salvarHabilidades()">
+            <button class="button" type="button" onclick="salvarHabilidades()">
               Salvar habilidades
             </button>
             <p class="aviso" id="sAviso">Habilidades salvas.</p>
@@ -237,29 +179,50 @@
         <div class="comp">
           <div>
             <div class="row">
-              <input type="checkbox" id="c0" onchange="marcarCompetencia(0)" />
+              <input type="checkbox" id="c0" />
               <label for="c0">Comunicação</label>
             </div>
             <div class="row">
-              <input type="checkbox" id="c1" onchange="marcarCompetencia(1)" />
+              <input type="checkbox" id="c1" />
               <label for="c1">Trabalho em equipe</label>
             </div>
             <div class="row">
-              <input type="checkbox" id="c2" onchange="marcarCompetencia(2)" />
+              <input type="checkbox" id="c2" />
               <label for="c2">Liderança</label>
             </div>
             <div class="row">
-              <input type="checkbox" id="c3" onchange="marcarCompetencia(3)" />
+              <input type="checkbox" id="c3" />
               <label for="c3">Resolução de problemas</label>
             </div>
             <div class="row">
-              <input type="checkbox" id="c4" onchange="marcarCompetencia(4)" />
+              <input type="checkbox" id="c4" />
               <label for="c4">Criatividade</label>
             </div>
             <div class="row">
-              <input type="checkbox" id="c5" onchange="marcarCompetencia(5)" />
+              <input type="checkbox" id="c5" />
               <label for="c5">Organização</label>
             </div>
+
+            <div class="acoes">
+              <button
+                class="button"
+                id="compbutton"
+                type="button"
+                onclick="enviarCompetencias()"
+              >
+                Enviar
+              </button>
+              <button
+                class="button contorno"
+                type="button"
+                onclick="redefinirCompetencias()"
+              >
+                Redefinir
+              </button>
+            </div>
+            <p class="aviso" id="compAviso">
+              Competências enviadas. Para trocar, clique em redefinir.
+            </p>
           </div>
 
           <div class="grafico">
@@ -285,7 +248,7 @@
           ></textarea>
           <div class="cnt">
             <span id="cContador">0/250</span>
-            <button class="btn" type="button" onclick="publicarComentario()">
+            <button class="button" type="button" onclick="publicarComentario()">
               Publicar comentário
             </button>
           </div>
@@ -294,11 +257,11 @@
         <div class="aviso" id="cAviso">
           <p>Comentário publicado. Você só pode ter um.</p>
           <div class="acoes">
-            <button class="btn" type="button" onclick="editarComentario()">
+            <button class="button" type="button" onclick="editarComentario()">
               Editar comentário
             </button>
             <button
-              class="btn contorno"
+              class="button contorno"
               type="button"
               onclick="apagarComentario()"
             >
@@ -307,75 +270,31 @@
           </div>
         </div>
 
+        <!-- AQUI aparece o comentário publicado -->
         <div id="cLista2"></div>
       </section>
     </main>
 
-    <script src="../js/dashboard.js"></script>
-  </body>
-</html>
+    <script>
+      // =========================================================
+      // DADOS (tudo começa vazio; depois virão do banco)
+      // =========================================================
 
-<script>
-  // Deixa os gráficos com a mesma fonte e cor de texto do site
-  Chart.defaults.font.family = "Inter, sans-serif";
-  Chart.defaults.color = "#464b50";
+      // Significado (na mesma ordem dos quadrados do HTML)
+      const significados = [
+        "Autoconhecimento",
+        "Crescimento profissional",
+        "Propósito",
+        "Conexão com pessoas",
+        "Liberdade",
+      ];
+      const votosSig = [0, 0, 0, 0, 0];
+      const coresSig = ["#a9bd7c", "#a9bd7c", "#a9bd7c", "#a9bd7c", "#a9bd7c"]; // claras; só a do meu voto fica escura
+      let meuSig = -1; // -1 = ainda não enviei
+      let jaEnviouSig = false;
 
-  // =========================================================
-  // DADOS (tudo começa vazio; depois virão do banco)
-  // =========================================================
-
-  // Significado (na mesma ordem dos quadrados do HTML)
-  const significados = [
-    "Autoconhecimento",
-    "Crescimento profissional",
-    "Propósito",
-    "Conexão com pessoas",
-    "Liberdade",
-  ];
-  const votosSig = [0, 0, 0, 0, 0];
-  let meuSig = -1; // -1 = ainda não enviei
-  let jaEnviouSig = false;
-  let graficoSig; // o gráfico só é criado quando a pessoa envia
-
-  // Habilidades (na mesma ordem dos campos do HTML)
-  const nomesHab = [
-    "Velocidade",
-    "Finalização",
-    "Passe",
-    "Drible",
-    "Defesa",
-    "Força",
-    "Visão de jogo",
-    "Resistência",
-  ];
-  const notas = [0, 0, 0, 0, 0, 0, 0, 0];
-
-  // Competências (na mesma ordem dos quadrados do HTML)
-  const competencias = [
-    "Comunicação",
-    "Trabalho em equipe",
-    "Liderança",
-    "Resolução de problemas",
-    "Criatividade",
-    "Organização",
-  ];
-  const votosComp = [0, 0, 0, 0, 0, 0];
-  const minhasComp = [false, false, false, false, false, false];
-
-  // Comentário
-  const comentarios = [];
-  let jaComentei = false;
-  let meuTextoBruto = ""; // o texto que a pessoa digitou (para poder editar)
-
-  // =========================================================
-  // GRÁFICO DAS HABILIDADES (radar, parecido com o do FIFA)
-  // =========================================================
-  const ctxRadar = document.getElementById("radarCanvas");
-
-  const graficoRadar = new Chart(ctxRadar, {
-    type: "radar",
-    data: {
-      labels: [
+      // Habilidades (na mesma ordem dos campos do HTML)
+      const nomesHab = [
         "Velocidade",
         "Finalização",
         "Passe",
@@ -384,366 +303,461 @@
         "Força",
         "Visão de jogo",
         "Resistência",
-      ],
-      datasets: [
-        {
-          label: "Suas habilidades",
-          data: notas,
-          backgroundColor: "rgba(217, 255, 50, 0.25)",
-          borderColor: "rgb(217, 255, 50)",
-          borderWidth: 2,
+      ];
+      const notas = [0, 0, 0, 0, 0, 0, 0, 0];
+
+      // Competências (na mesma ordem dos quadrados do HTML)
+      const competencias = [
+        "Comunicação",
+        "Trabalho em equipe",
+        "Liderança",
+        "Resolução de problemas",
+        "Criatividade",
+        "Organização",
+      ];
+      const votosComp = [0, 0, 0, 0, 0, 0];
+      const minhasComp = [false, false, false, false, false, false];
+      let jaEnviouComp = false;
+
+      // Comentário
+      const comentarios = [];
+      let jaComentei = false;
+      let meuTextoBruto = ""; // o texto que a pessoa digitou (para poder editar)
+
+      // =========================================================
+      // GRÁFICO DO SIGNIFICADO (colunas, sobem de baixo para cima)
+      // =========================================================
+      const ctxSig = document.getElementById("sigCanvas");
+
+      const graficoSig = new Chart(ctxSig, {
+        type: "bar",
+        data: {
+          labels: [
+            ["Autoconhecimento"],
+            ["Crescimento", "profissional"],
+            ["Propósito"],
+            ["Conexão", "com pessoas"],
+            ["Liberdade"],
+          ],
+          datasets: [
+            {
+              label: "Votos",
+              data: votosSig,
+              backgroundColor: coresSig,
+              borderWidth: 2,
+            },
+          ],
         },
-      ],
-    },
-    options: {
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-      },
-      scales: {
-        r: {
-          min: 0,
-          max: 100,
-          ticks: {
-            stepSize: 20,
-            color: "rgba(255, 255, 255, 0.45)",
-            backdropColor: "transparent",
+        options: {
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
           },
-          grid: { color: "rgba(255, 255, 255, 0.15)" },
-          angleLines: { color: "rgba(255, 255, 255, 0.15)" },
-          pointLabels: { color: "white", font: { size: 13 } },
-        },
-      },
-    },
-  });
-
-  // =========================================================
-  // GRÁFICO DAS COMPETÊNCIAS (colunas, sobem de baixo para cima)
-  // =========================================================
-  const ctxComp = document.getElementById("compCanvas");
-
-  const graficoComp = new Chart(ctxComp, {
-    type: "bar",
-    data: {
-      labels: [
-        ["Comunicação"],
-        ["Trabalho", "em equipe"],
-        ["Liderança"],
-        ["Resolução", "de problemas"],
-        ["Criatividade"],
-        ["Organização"],
-      ],
-      datasets: [
-        {
-          label: "Votos",
-          data: votosComp,
-          backgroundColor: "rgb(51, 69, 18)",
-          borderWidth: 2,
-        },
-      ],
-    },
-    options: {
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          suggestedMax: 5,
-          ticks: { precision: 0 },
-        },
-      },
-    },
-  });
-
-  // =========================================================
-  // KPIs
-  // =========================================================
-  function atualizarKPIs() {
-    // KPI 1: habilidade de maior nota
-    let maiorIndice = 0;
-    for (let i = 1; i < notas.length; i++) {
-      if (notas[i] > notas[maiorIndice]) {
-        maiorIndice = i;
-      }
-    }
-    if (notas[maiorIndice] == 0) {
-      document.getElementById("k1").textContent = "–";
-      document.getElementById("k1s").textContent =
-        "Preencha suas habilidades abaixo";
-    } else {
-      document.getElementById("k1").textContent = notas[maiorIndice];
-      document.getElementById("k1s").textContent = nomesHab[maiorIndice];
-    }
-
-    // KPI 2: quantas competências eu marquei
-    let quantas = 0;
-    for (let j = 0; j < minhasComp.length; j++) {
-      if (minhasComp[j] == true) {
-        quantas = quantas + 1;
-      }
-    }
-    document.getElementById("k2").textContent = quantas;
-    document.getElementById("k2s").textContent =
-      "de " + competencias.length + " disponíveis";
-
-    // KPI 3: significado que eu enviei
-    if (meuSig == -1) {
-      document.getElementById("k3").textContent = "–";
-      document.getElementById("k3s").textContent = "Escolha uma opção e envie";
-    } else {
-      document.getElementById("k3").textContent = significados[meuSig];
-      document.getElementById("k3s").textContent =
-        "O significado que você escolheu";
-    }
-  }
-
-  // =========================================================
-  // SIGNIFICADO
-  // =========================================================
-  function enviarSignificado() {
-    if (jaEnviouSig == true) {
-      return;
-    }
-
-    // descobre qual quadrado está pintado
-    const quadrados = document.getElementsByName("significado");
-    let escolhido = -1;
-    for (let i = 0; i < quadrados.length; i++) {
-      if (quadrados[i].checked) {
-        escolhido = i;
-      }
-    }
-
-    if (escolhido == -1) {
-      alert("Escolha uma opção antes de enviar");
-      return;
-    }
-
-    // Depois: aqui você faz um POST para salvar no banco
-    meuSig = escolhido;
-    votosSig[escolhido] = votosSig[escolhido] + 1;
-    jaEnviouSig = true;
-
-    // trava os quadrados e o botão (só um voto por pessoa)
-    for (let j = 0; j < quadrados.length; j++) {
-      quadrados[j].disabled = true;
-    }
-    document.getElementById("sigBtn").disabled = true;
-    document.getElementById("sigAviso").style.display = "block";
-    document.getElementById("sigBloco").style.display = "block";
-
-    // todas as colunas claras, só a minha fica escura
-    const cores = ["#a9bd7c", "#a9bd7c", "#a9bd7c", "#a9bd7c", "#a9bd7c"];
-    cores[escolhido] = "#334512";
-
-    // cria o gráfico (colunas que sobem de baixo para cima)
-    const ctxSig = document.getElementById("sigCanvas");
-
-    graficoSig = new Chart(ctxSig, {
-      type: "bar",
-      data: {
-        labels: [
-          ["Autoconhecimento"],
-          ["Crescimento", "profissional"],
-          ["Propósito"],
-          ["Conexão", "com pessoas"],
-          ["Liberdade"],
-        ],
-        datasets: [
-          {
-            label: "Votos",
-            data: votosSig,
-            backgroundColor: cores,
-            borderWidth: 2,
-          },
-        ],
-      },
-      options: {
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            suggestedMax: 5,
-            ticks: { precision: 0 },
+          scales: {
+            y: {
+              beginAtZero: true,
+              suggestedMax: 5,
+              ticks: { precision: 0 },
+            },
           },
         },
-      },
-    });
+      });
 
-    atualizarKPIs();
-  }
+      // =========================================================
+      // GRÁFICO DAS HABILIDADES (radar, parecido com o do FIFA)
+      // =========================================================
+      const ctxRadar = document.getElementById("radarCanvas");
 
-  function redefinirSignificado() {
-    // destrava e desmarca os quadrados
-    const quadrados = document.getElementsByName("significado");
-    for (let i = 0; i < quadrados.length; i++) {
-      quadrados[i].checked = false;
-      quadrados[i].disabled = false;
-    }
+      const graficoRadar = new Chart(ctxRadar, {
+        type: "radar",
+        data: {
+          labels: [
+            "Velocidade",
+            "Finalização",
+            "Passe",
+            "Drible",
+            "Defesa",
+            "Força",
+            "Visão de jogo",
+            "Resistência",
+          ],
+          datasets: [
+            {
+              label: "Suas habilidades",
+              data: notas,
+              backgroundColor: "rgba(217, 255, 50, 0.25)",
+              borderColor: "rgb(217, 255, 50)",
+              borderWidth: 2,
+            },
+          ],
+        },
+        options: {
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+          },
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: {
+                stepSize: 20,
+                color: "rgba(255, 255, 255, 0.45)",
+                backdropColor: "transparent",
+              },
+              grid: { color: "rgba(255, 255, 255, 0.15)" },
+              angleLines: { color: "rgba(255, 255, 255, 0.15)" },
+              pointLabels: { color: "white", font: { size: 13 } },
+            },
+          },
+        },
+      });
 
-    // se já tinha enviado: tira o meu voto e apaga o gráfico
-    if (jaEnviouSig == true) {
-      votosSig[meuSig] = votosSig[meuSig] - 1;
-      graficoSig.destroy();
-    }
-    meuSig = -1;
-    jaEnviouSig = false;
+      // =========================================================
+      // GRÁFICO DAS COMPETÊNCIAS (colunas, sobem de baixo para cima)
+      // =========================================================
+      const ctxComp = document.getElementById("compCanvas");
 
-    // Depois: aqui você faz um DELETE/UPDATE no banco
+      const graficoComp = new Chart(ctxComp, {
+        type: "bar",
+        data: {
+          labels: [
+            ["Comunicação"],
+            ["Trabalho", "em equipe"],
+            ["Liderança"],
+            ["Resolução", "de problemas"],
+            ["Criatividade"],
+            ["Organização"],
+          ],
+          datasets: [
+            {
+              label: "Votos",
+              data: votosComp,
+              backgroundColor: "rgb(51, 69, 18)",
+              borderWidth: 2,
+            },
+          ],
+        },
+        options: {
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              suggestedMax: 5,
+              ticks: { precision: 0 },
+            },
+          },
+        },
+      });
 
-    document.getElementById("sigBtn").disabled = false;
-    document.getElementById("sigAviso").style.display = "none";
-    document.getElementById("sigBloco").style.display = "none";
+      // =========================================================
+      // KPIs
+      // =========================================================
+      function atualizarKPIs() {
+        // KPI 1: habilidade de maior nota
+        let maiorIndice = 0;
+        for (let i = 1; i < notas.length; i++) {
+          if (notas[i] > notas[maiorIndice]) {
+            maiorIndice = i;
+          }
+        }
+        if (notas[maiorIndice] == 0) {
+          document.getElementById("k1").textContent = "–";
+          document.getElementById("k1s").textContent =
+            "Preencha suas habilidades abaixo";
+        } else {
+          document.getElementById("k1").textContent = notas[maiorIndice];
+          document.getElementById("k1s").textContent = nomesHab[maiorIndice];
+        }
 
-    atualizarKPIs();
-  }
+        // KPI 2: quantas competências eu marquei
+        let quantas = 0;
+        for (let j = 0; j < minhasComp.length; j++) {
+          if (minhasComp[j] == true) {
+            quantas = quantas + 1;
+          }
+        }
+        document.getElementById("k2").textContent = quantas;
+        document.getElementById("k2s").textContent =
+          "de " + competencias.length + " disponíveis";
 
-  // =========================================================
-  // HABILIDADES
-  // =========================================================
-
-  // roda toda vez que a pessoa digita uma nota
-  function mudouHabilidade() {
-    for (let i = 0; i < 8; i++) {
-      const campo = document.getElementById("h" + i);
-      let valor = Number(campo.value);
-
-      if (valor > 100) {
-        valor = 100;
-        campo.value = 100;
+        // KPI 3: significado que eu enviei
+        if (meuSig == -1) {
+          document.getElementById("k3").textContent = "–";
+          document.getElementById("k3s").textContent =
+            "Escolha uma opção e envie";
+        } else {
+          document.getElementById("k3").textContent = significados[meuSig];
+          document.getElementById("k3s").textContent =
+            "O significado que você escolheu";
+        }
       }
-      if (valor < 0) {
-        valor = 0;
-        campo.value = 0;
+
+      // =========================================================
+      // SIGNIFICADO
+      // =========================================================
+      function enviarSignificado() {
+        if (jaEnviouSig == true) {
+          return;
+        }
+
+        // descobre qual quadrado está pintado
+        const quadrados = document.getElementsByName("significado");
+        let escolhido = -1;
+        for (let i = 0; i < quadrados.length; i++) {
+          if (quadrados[i].checked) {
+            escolhido = i;
+          }
+        }
+
+        if (escolhido == -1) {
+          alert("Escolha uma opção antes de enviar");
+          return;
+        }
+
+        // Depois: aqui você faz um POST para salvar no banco
+        meuSig = escolhido;
+        votosSig[escolhido] = votosSig[escolhido] + 1;
+        jaEnviouSig = true;
+
+        // trava os quadrados e o botão (só um voto por pessoa)
+        for (let j = 0; j < quadrados.length; j++) {
+          quadrados[j].disabled = true;
+        }
+        document.getElementById("sigbutton").disabled = true;
+        document.getElementById("sigAviso").style.display = "block";
+
+        // todas as colunas claras, só a minha fica escura
+        for (let k = 0; k < coresSig.length; k++) {
+          coresSig[k] = "#a9bd7c";
+        }
+        coresSig[escolhido] = "#334512";
+
+        graficoSig.update();
+        atualizarKPIs();
       }
 
-      notas[i] = valor;
-      document.getElementById("hb" + i).style.width = valor + "%"; // barrinha embaixo do número
-    }
+      function redefinirSignificado() {
+        // destrava e desmarca os quadrados
+        const quadrados = document.getElementsByName("significado");
+        for (let i = 0; i < quadrados.length; i++) {
+          quadrados[i].checked = false;
+          quadrados[i].disabled = false;
+        }
 
-    graficoRadar.update();
-    atualizarKPIs();
-  }
+        // se já tinha enviado: tira o meu voto
+        if (jaEnviouSig == true) {
+          votosSig[meuSig] = votosSig[meuSig] - 1;
+        }
+        meuSig = -1;
+        jaEnviouSig = false;
 
-  function salvarHabilidades() {
-    // Depois: aqui você faz um POST para salvar as notas no banco
-    document.getElementById("sAviso").style.display = "block";
-  }
+        // Depois: aqui você faz um DELETE/UPDATE no banco
 
-  // =========================================================
-  // COMPETÊNCIAS
-  // =========================================================
-  function marcarCompetencia(posicao) {
-    if (minhasComp[posicao] == true) {
-      minhasComp[posicao] = false;
-      votosComp[posicao] = votosComp[posicao] - 1;
-    } else {
-      minhasComp[posicao] = true;
-      votosComp[posicao] = votosComp[posicao] + 1;
-    }
+        // todas as colunas voltam a ficar claras
+        for (let j = 0; j < coresSig.length; j++) {
+          coresSig[j] = "#a9bd7c";
+        }
 
-    // Depois: aqui você faz um POST para salvar no banco
-    graficoComp.update();
-    atualizarKPIs();
-  }
+        document.getElementById("sigbutton").disabled = false;
+        document.getElementById("sigAviso").style.display = "none";
 
-  // =========================================================
-  // COMENTÁRIO
-  // =========================================================
-
-  // Troca "<" por "&lt;" para ninguém digitar código no campo
-  function limpar(texto) {
-    return texto.replace(/</g, "&lt;");
-  }
-
-  function contarLetras() {
-    const tamanho = document.getElementById("cTexto").value.length;
-    document.getElementById("cContador").textContent = tamanho + "/250";
-  }
-
-  function mostrarComentarios() {
-    let html = "";
-
-    if (comentarios.length == 0) {
-      html = '<p class="vazio">Nenhum comentário ainda.</p>';
-    }
-
-    for (let i = 0; i < comentarios.length; i++) {
-      html += '<div class="cm">';
-      html +=
-        "<b>" +
-        comentarios[i].nome +
-        "</b><small>" +
-        comentarios[i].data +
-        "</small>";
-      html += "<div>" + comentarios[i].texto + "</div>";
-      html += "</div>";
-    }
-    document.getElementById("cLista2").innerHTML = html;
-  }
-
-  function publicarComentario() {
-    const bruto = document.getElementById("cTexto").value;
-
-    if (bruto == "") {
-      alert("Escreva seu comentário");
-      return;
-    }
-    if (jaComentei == true) {
-      return;
-    }
-
-    // Depois: aqui você faz um POST para salvar no banco
-    const hoje = new Date().toLocaleDateString("pt-BR");
-    comentarios.unshift({ nome: "Você", texto: limpar(bruto), data: hoje });
-    meuTextoBruto = bruto;
-    jaComentei = true;
-
-    document.getElementById("cForm").style.display = "none";
-    document.getElementById("cAviso").style.display = "block";
-    mostrarComentarios();
-  }
-
-  // tira o meu comentário da lista e volta o campo de escrever
-  function removerMeuComentario() {
-    for (let i = 0; i < comentarios.length; i++) {
-      if (comentarios[i].nome == "Você") {
-        comentarios.splice(i, 1);
-        break;
+        graficoSig.update();
+        atualizarKPIs();
       }
-    }
-    jaComentei = false;
 
-    // Depois: aqui você faz um DELETE no banco
+      // =========================================================
+      // HABILIDADES
+      // =========================================================
 
-    document.getElementById("cForm").style.display = "block";
-    document.getElementById("cAviso").style.display = "none";
-    mostrarComentarios();
-  }
+      // roda toda vez que a pessoa digita uma nota
+      function mudouHabilidade() {
+        for (let i = 0; i < 8; i++) {
+          const campo = document.getElementById("h" + i);
+          let valor = Number(campo.value);
 
-  // Editar: apaga o antigo e já deixa o texto no campo para você mudar
-  function editarComentario() {
-    const antigo = meuTextoBruto;
-    removerMeuComentario();
-    document.getElementById("cTexto").value = antigo;
-    contarLetras();
-  }
+          // não deixa passar de 100 nem ficar abaixo de 0
+          if (valor > 100) {
+            valor = 100;
+            campo.value = 100;
+          }
+          if (valor < 0) {
+            valor = 0;
+            campo.value = 0;
+          }
 
-  // Apagar: apaga o antigo e deixa o campo vazio
-  function apagarComentario() {
-    removerMeuComentario();
-    document.getElementById("cTexto").value = "";
-    contarLetras();
-  }
+          notas[i] = valor;
+        }
 
-  // =========================================================
-  // QUANDO A PÁGINA ABRE
-  // =========================================================
-  mostrarComentarios();
-  atualizarKPIs();
-</script>
+        graficoRadar.update();
+        atualizarKPIs();
+      }
+
+      function salvarHabilidades() {
+        // Depois: aqui você faz um POST para salvar as notas no banco
+        document.getElementById("sAviso").style.display = "block";
+      }
+
+      // =========================================================
+      // COMPETÊNCIAS
+      // =========================================================
+      function enviarCompetencias() {
+        if (jaEnviouComp == true) {
+          return;
+        }
+
+        // conta quantos quadrados estão pintados
+        let marcadas = 0;
+        for (let i = 0; i < 6; i++) {
+          if (document.getElementById("c" + i).checked) {
+            marcadas = marcadas + 1;
+          }
+        }
+
+        if (marcadas == 0) {
+          alert("Marque pelo menos uma competência antes de enviar");
+          return;
+        }
+
+        // Depois: aqui você faz um POST para salvar no banco
+        for (let j = 0; j < 6; j++) {
+          const caixa = document.getElementById("c" + j);
+          if (caixa.checked) {
+            minhasComp[j] = true;
+            votosComp[j] = votosComp[j] + 1;
+          }
+          caixa.disabled = true; // trava os quadrados
+        }
+        jaEnviouComp = true;
+
+        document.getElementById("compbutton").disabled = true;
+        document.getElementById("compAviso").style.display = "block";
+
+        graficoComp.update();
+        atualizarKPIs();
+      }
+
+      function redefinirCompetencias() {
+        // destrava e desmarca os quadrados; tira os meus votos
+        for (let i = 0; i < 6; i++) {
+          const caixa = document.getElementById("c" + i);
+          caixa.checked = false;
+          caixa.disabled = false;
+
+          if (minhasComp[i] == true) {
+            minhasComp[i] = false;
+            votosComp[i] = votosComp[i] - 1;
+          }
+        }
+        jaEnviouComp = false;
+
+        // Depois: aqui você faz um DELETE no banco
+
+        document.getElementById("compbutton").disabled = false;
+        document.getElementById("compAviso").style.display = "none";
+
+        graficoComp.update();
+        atualizarKPIs();
+      }
+
+      // =========================================================
+      // COMENTÁRIO
+      // =========================================================
+
+      // Troca "<" por "&lt;" para ninguém digitar código no campo
+      function limpar(texto) {
+        return texto.replace(/</g, "&lt;");
+      }
+
+      function contarLetras() {
+        const tamanho = document.getElementById("cTexto").value.length;
+        document.getElementById("cContador").textContent = tamanho + "/250";
+      }
+
+      // desenha os comentários dentro do <div id="cLista2">
+      function mostrarComentarios() {
+        let html = "";
+
+        if (comentarios.length == 0) {
+          html = '<p class="vazio">Nenhum comentário ainda.</p>';
+        }
+
+        for (let i = 0; i < comentarios.length; i++) {
+          html += '<div class="cm">';
+          html +=
+            "<b>" +
+            comentarios[i].nome +
+            "</b><small>" +
+            comentarios[i].data +
+            "</small>";
+          html += "<div>" + comentarios[i].texto + "</div>";
+          html += "</div>";
+        }
+        document.getElementById("cLista2").innerHTML = html;
+      }
+
+      function publicarComentario() {
+        const bruto = document.getElementById("cTexto").value;
+
+        if (bruto == "") {
+          alert("Escreva seu comentário");
+          return;
+        }
+        if (jaComentei == true) {
+          return;
+        }
+
+        // Depois: aqui você faz um POST para salvar no banco
+        const hoje = new Date().toLocaleDateString("pt-BR");
+        comentarios.unshift({ nome: "Você", texto: limpar(bruto), data: hoje });
+        meuTextoBruto = bruto;
+        jaComentei = true;
+
+        document.getElementById("cForm").style.display = "none";
+        document.getElementById("cAviso").style.display = "block";
+        mostrarComentarios();
+      }
+
+      // tira o meu comentário da lista e volta o campo de escrever
+      function removerMeuComentario() {
+        for (let i = 0; i < comentarios.length; i++) {
+          if (comentarios[i].nome == "Você") {
+            comentarios.splice(i, 1);
+            break;
+          }
+        }
+        jaComentei = false;
+
+        // Depois: aqui você faz um DELETE no banco
+
+        document.getElementById("cForm").style.display = "block";
+        document.getElementById("cAviso").style.display = "none";
+        mostrarComentarios();
+      }
+
+      // Editar: apaga o antigo e já deixa o texto no campo para você mudar
+      function editarComentario() {
+        const antigo = meuTextoBruto;
+        removerMeuComentario();
+        document.getElementById("cTexto").value = antigo;
+        contarLetras();
+      }
+
+      // Apagar: apaga o antigo e deixa o campo vazio
+      function apagarComentario() {
+        removerMeuComentario();
+        document.getElementById("cTexto").value = "";
+        contarLetras();
+      }
+
+      // =========================================================
+      // QUANDO A PÁGINA ABRE
+      // =========================================================
+      mostrarComentarios();
+      atualizarKPIs();
+    </script>
+  </body>
+</html>
