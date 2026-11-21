@@ -1,64 +1,175 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/cadastro.css">
-    <link rel="shortcut icon" href="../public/assets/logo90.png" type="image/x-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Cadastre-se</title>
-</head>
-<body>
+
+    <script src="../public/js/sessao.js"></script>
+
+    <link rel="stylesheet" href="../public/css/cadastro.css" />
+    <link
+      rel="shortcut icon"
+      href="../public/assets/logo90.png"
+      type="image/x-icon"
+    />
+  </head>
+
+  <body>
     <div class="principal">
-
-        <div class="esquerda">
-            
-            <div class="voltar">
-                <a href="../public/index.html">
-                    <button>⭠</button>
-                </a>
-            </div>
-            <br>
-            <div class="esquerda-titulo">
-                <h1>Qual história o futebol <span>escreveu em você?</span></h1>
-            </div>
-            <div class="esquerda-conteudo">
-                <p>
-                    Crie sua conta e compartilhe sua experiência. Sua
-                    resposta ajuda a construir um retrato vivo de como
-                    o futebol transforma a vida das pessoas dentro e fora
-                    de campo.
-                </p>
-            </div>
+      <div class="esquerda">
+        <div class="voltar">
+          <a href="../public/index.html">
+            <button>⭠</button>
+          </a>
         </div>
-
-        <div class="direita">
-            <div class="direita-conteudo">
-                <h1>Cadastre-se</h1>
-                <p>Leva menos de um minuto.</p>
-
-                <!-- troque o action pelo endereço do seu back-end -->
-                <form action="#" method="post">
-                    <label for="ipt_nome">Nome</label>
-                    <input type="text" id="ipt_nome" name="nome" placeholder="Digite seu nome" required />
-
-                    <label for="ipt_email">E-mail</label>
-                    <input type="email" id="ipt_email" name="email" placeholder="seu-email@provedor.com" required />
-
-                    <label for="ipt_senha">Crie uma senha</label>
-                    <input type="password" id="ipt_senha" name="senha" placeholder="Mínimo de 6 caracteres" minlength="6" required />
-
-                    <label for="ipt_confirmar">Confirme sua senha</label>
-                    <input type="password" id="ipt_confirmar" name="confirmar" placeholder="Confirme sua senha" required />
-
-                    <button type="submit" class="botao-cadastro">Criar conta</button>
-                </form>
-
-                <p class="troca">
-                    Já tem conta? <a href="../public/login.html">Fazer login</a>
-                </p>
-            </div>
+        <br />
+        <div class="esquerda-titulo">
+          <h1>Qual história o futebol <span>escreveu em você?</span></h1>
         </div>
+        <div class="esquerda-conteudo">
+          <p>
+            Crie sua conta e compartilhe sua experiência. Sua resposta ajuda a
+            construir um retrato vivo de como o futebol transforma a vida das
+            pessoas dentro e fora de campo.
+          </p>
+        </div>
+      </div>
 
+      <div class="direita">
+        <div class="direita-conteudo">
+          <h1>Cadastre-se</h1>
+          <p>Leva menos de um minuto.</p>
+
+          <div class="alerta_erro">
+            <div class="card_erro" id="cardErro" style="display: none">
+              <span id="mensagem_erro"></span>
+            </div>
+          </div>
+
+          <div class="formulario">
+            <label for="nome_input">Nome</label>
+            <input type="text" id="nome_input" placeholder="Digite seu nome" />
+
+            <label for="email_input">E-mail</label>
+            <input
+              type="text"
+              id="email_input"
+              placeholder="seu-email@provedor.com"
+            />
+
+            <label for="senha_input">Crie uma senha</label>
+            <input
+              type="password"
+              id="senha_input"
+              placeholder="Mínimo de 6 caracteres"
+            />
+
+            <label for="confirmacao_senha_input">Confirme sua senha</label>
+            <input
+              type="password"
+              id="confirmacao_senha_input"
+              placeholder="Confirme sua senha"
+            />
+
+            <button type="button" class="botao-cadastro" onclick="cadastrar()">
+              Criar conta
+            </button>
+          </div>
+
+          <div id="div_aguardar" class="loading-div" style="display: none">
+            <img src="../public/assets/circle-loading.gif" id="loading-gif" />
+          </div>
+
+          <div id="div_erros_login"></div>
+
+          <p class="troca">
+            Já tem conta? <a href="../public/login.html">Fazer login</a>
+          </p>
+        </div>
+      </div>
     </div>
-</body>
+
+    <script>
+      function cadastrar() {
+        aguardar();
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeVar = nome_input.value;
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+        var confirmacaoSenhaVar = confirmacao_senha_input.value;
+
+        // Verificando se há algum campo em branco
+        if (
+          nomeVar == "" ||
+          emailVar == "" ||
+          senhaVar == "" ||
+          confirmacaoSenhaVar == ""
+        ) {
+          cardErro.style.display = "block";
+          mensagem_erro.innerHTML = "Preencha todos os campos.";
+
+          finalizarAguardar();
+          setTimeout(sumirMensagem, 5000);
+          return false;
+        }
+
+        // Verificando se a senha e a confirmação são iguais
+        if (senhaVar != confirmacaoSenhaVar) {
+          cardErro.style.display = "block";
+          mensagem_erro.innerHTML = "As senhas não são iguais.";
+
+          finalizarAguardar();
+          setTimeout(sumirMensagem, 5000);
+          return false;
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            nomeServer: nomeVar,
+            emailServer: emailVar,
+            senhaServer: senhaVar,
+          }),
+        })
+          .then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+              cardErro.style.display = "block";
+
+              mensagem_erro.innerHTML =
+                "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+              setTimeout(() => {
+                window.location = "login.html";
+              }, "2000");
+
+              finalizarAguardar();
+            } else {
+              throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+          })
+          .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+          });
+
+        return false;
+      }
+
+      function sumirMensagem() {
+        cardErro.style.display = "none";
+      }
+    </script>
+  </body>
 </html>
