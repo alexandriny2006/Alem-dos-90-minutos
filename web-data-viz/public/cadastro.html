@@ -6,12 +6,12 @@
 
     <title>Cadastre-se</title>
 
-    <script src="../public/js/sessao.js"></script>
+    <script src="js/sessao.js"></script>
 
-    <link rel="stylesheet" href="../public/css/cadastro.css" />
+    <link rel="stylesheet" href="css/cadastro.css" />
     <link
       rel="shortcut icon"
-      href="../public/assets/logo90.png"
+      href="assets/logo90.png"
       type="image/x-icon"
     />
   </head>
@@ -20,7 +20,7 @@
     <div class="principal">
       <div class="esquerda">
         <div class="voltar">
-          <a href="../public/index.html">
+          <a href="index.html">
             <button>⭠</button>
           </a>
         </div>
@@ -79,13 +79,13 @@
           </div>
 
           <div id="div_aguardar" class="loading-div" style="display: none">
-            <img src="../public/assets/circle-loading.gif" id="loading-gif" />
+          Cadastro realizado com sucesso! Redirecionando...
           </div>
 
           <div id="div_erros_login"></div>
 
           <p class="troca">
-            Já tem conta? <a href="../public/login.html">Fazer login</a>
+            Já tem conta? <a href="login.html">Fazer login</a>
           </p>
         </div>
       </div>
@@ -152,7 +152,7 @@
 
               setTimeout(() => {
                 window.location = "login.html";
-              }, "2000");
+              }, "3000");
 
               finalizarAguardar();
             } else {
@@ -162,7 +162,11 @@
           .catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
             finalizarAguardar();
-          });
+
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "Não foi possível cadastrar. Verifique os dados (o e-mail pode já estar em uso).";
+            setTimeout(sumirMensagem, 5000);
+            });
 
         return false;
       }

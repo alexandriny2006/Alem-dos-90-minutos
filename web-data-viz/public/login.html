@@ -62,7 +62,7 @@
           </button>
 
           <div id="div_aguardar" class="loading-div" style="display: none">
-            <img src="assets/circle-loading.gif" id="loading-gif" />
+          Login realizado com sucesso! Redirecionando...
           </div>
 
           <div id="div_erros_login"></div>
@@ -118,15 +118,19 @@
 
                 setTimeout(function () {
                   window.location = "dashboard/dashboard.html";
-                }, 1000); // apenas para exibir o loading
+                }, 2500); // apenas para exibir o loading
               });
             } else {
               console.log("Houve um erro ao tentar realizar o login!");
 
               resposta.text().then((texto) => {
-                console.error(texto);
-                finalizarAguardar(texto);
-              });
+              console.error(texto);
+              finalizarAguardar();
+
+              cardErro.style.display = "block";
+              mensagem_erro.innerHTML = texto;
+              setTimeout(sumirMensagem, 5000);
+            });
             }
           })
           .catch(function (erro) {
