@@ -13,12 +13,6 @@ Uma experiência que conecta futebol, opiniões e sentimentos.
 
 </div>
 
-<div align="center">
-  <img src="https://img.shields.io/badge/Projeto-Acad%C3%AAmico-124D27?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Status-Em%20desenvolvimento-3F8F50?style=for-the-badge" />
-</div>
-
----
 
 ## 📌 Sobre o projeto
 
