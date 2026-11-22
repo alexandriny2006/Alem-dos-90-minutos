@@ -262,165 +262,54 @@
     </main>
 
     <script>
-      // =========================================================
-      // DADOS (tudo começa vazio; depois virão do banco)
-      // =========================================================
-
-      // Significado (na mesma ordem dos quadrados do HTML)
-      var significados = [
-        "Autoconhecimento",
-        "Crescimento profissional",
-        "Propósito",
-        "Conexão com pessoas",
-        "Liberdade",
-      ];
+      // Dados coletivos carregados do banco e dados individuais da conta logada
+      var significados = ["Autoconhecimento", "Crescimento profissional", "Propósito", "Conexão com pessoas", "Liberdade"];
       var votosSig = [0, 0, 0, 0, 0];
       var coresSig = ["#a9bd7c", "#a9bd7c", "#a9bd7c", "#a9bd7c", "#a9bd7c"];
-      var meuSig = -1; // -1 = ainda não enviei
+      var meuSig = -1;
 
-      // Habilidades (na mesma ordem dos campos do HTML)
-      var nomesHab = [
-        "Velocidade",
-        "Finalização",
-        "Passe",
-        "Drible",
-        "Defesa",
-        "Força",
-        "Visão de jogo",
-        "Resistência",
-      ];
+      var nomesHab = ["Velocidade", "Finalização", "Passe", "Drible", "Defesa", "Força", "Visão de jogo", "Resistência"];
       var notas = [0, 0, 0, 0, 0, 0, 0, 0];
+      var mediasHab = [0, 0, 0, 0, 0, 0, 0, 0];
 
-      // Competências (na mesma ordem dos quadrados do HTML)
-      var competencias = [
-        "Comunicação",
-        "Trabalho em equipe",
-        "Liderança",
-        "Resolução de problemas",
-        "Criatividade",
-        "Organização",
-      ];
+      var competencias = ["Comunicação", "Trabalho em equipe", "Liderança", "Resolução de problemas", "Criatividade", "Organização"];
       var votosComp = [0, 0, 0, 0, 0, 0];
       var minhasComp = [false, false, false, false, false, false];
-
-      // Comentário
       var comentarios = [];
       var jaComentei = false;
       var meuTexto = "";
+      var idUsuario = sessionStorage.ID_USUARIO;
 
-      // =========================================================
-      // GRÁFICO DO SIGNIFICADO
-      // =========================================================
-      var ctxSig = document.getElementById("sigCanvas");
 
-      var graficoSig = new Chart(ctxSig, {
+      // Gráfico de significado: dados de todos os usuários
+      var graficoSig = new Chart(document.getElementById("sigCanvas"), {
         type: "bar",
-        data: {
-          labels: significados,
-          datasets: [
-            {
-              label: "Votos",
-              data: votosSig,
-              backgroundColor: coresSig,
-              borderWidth: 2,
-            },
-          ],
-        },
-        options: {
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { display: false },
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              suggestedMax: 5,
-            },
-          },
-        },
+        data: { labels: significados, datasets: [{ label: "Votos", data: votosSig, backgroundColor: coresSig, borderWidth: 2 }] },
+        options: { maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
       });
 
-      // =========================================================
-      // GRÁFICO DAS HABILIDADES (radar)
-      // =========================================================
-      var ctxRadar = document.getElementById("radarCanvas");
 
-      var graficoRadar = new Chart(ctxRadar, {
+      // Radar: média das notas de todos os usuários
+      var graficoRadar = new Chart(document.getElementById("radarCanvas"), {
         type: "radar",
-        data: {
-          labels: nomesHab,
-          datasets: [
-            {
-              label: "Suas habilidades",
-              data: notas,
-              backgroundColor: "rgba(217, 255, 50, 0.25)",
-              borderColor: "rgb(217, 255, 50)",
-              borderWidth: 2,
-            },
-          ],
-        },
-        options: {
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { display: false },
-          },
-          scales: {
-            r: {
-              min: 0,
-              max: 100,
-              ticks: { display: false, stepSize: 20 },
-              grid: { color: "rgba(255, 255, 255, 0.2)" },
-              angleLines: { color: "rgba(255, 255, 255, 0.2)" },
-              pointLabels: { color: "white" },
-            },
-          },
-        },
+        data: { labels: nomesHab, datasets: [{ label: "Média da comunidade", data: mediasHab, backgroundColor: "rgba(217, 255, 50, 0.25)", borderColor: "rgb(217, 255, 50)", borderWidth: 2 }] },
+        options: { maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { r: { min: 0, max: 100, ticks: { display: false, stepSize: 20 }, grid: { color: "rgba(255, 255, 255, 0.2)" }, angleLines: { color: "rgba(255, 255, 255, 0.2)" }, pointLabels: { color: "white" } } } }
       });
 
-      // =========================================================
-      // GRÁFICO DAS COMPETÊNCIAS
-      // =========================================================
-      var ctxComp = document.getElementById("compCanvas");
 
-      var graficoComp = new Chart(ctxComp, {
+      // Gráfico de competências: votos de todos os usuários
+      var graficoComp = new Chart(document.getElementById("compCanvas"), {
         type: "bar",
-        data: {
-          labels: competencias,
-          datasets: [
-            {
-              label: "Votos",
-              data: votosComp,
-              backgroundColor: "rgb(51, 69, 18)",
-              borderWidth: 2,
-            },
-          ],
-        },
-        options: {
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { display: false },
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              suggestedMax: 5,
-            },
-          },
-        },
+        data: { labels: competencias, datasets: [{ label: "Votos", data: votosComp, backgroundColor: "rgb(51, 69, 18)", borderWidth: 2 }] },
+        options: { maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
       });
 
-      // =========================================================
-      // KPIs (os 3 números do topo)
-      // =========================================================
+
       function atualizarKPIs() {
-        // KPI 1: habilidade de maior nota
         var maiorIndice = 0;
         for (var i = 1; i < notas.length; i++) {
-          if (notas[i] > notas[maiorIndice]) {
-            maiorIndice = i;
-          }
+          if (notas[i] > notas[maiorIndice]) maiorIndice = i;
         }
-
         if (notas[maiorIndice] == 0) {
           k1.innerHTML = "–";
           k1s.innerHTML = "Preencha suas habilidades abaixo";
@@ -428,18 +317,10 @@
           k1.innerHTML = notas[maiorIndice];
           k1s.innerHTML = nomesHab[maiorIndice];
         }
-
-        // KPI 2: quantas competências eu enviei
         var quantas = 0;
-        for (var j = 0; j < 6; j++) {
-          if (minhasComp[j] == true) {
-            quantas = quantas + 1;
-          }
-        }
+        for (var j = 0; j < minhasComp.length; j++) if (minhasComp[j]) quantas++;
         k2.innerHTML = quantas;
         k2s.innerHTML = "de " + competencias.length + " disponíveis";
-
-        // KPI 3: significado que eu enviei
         if (meuSig == -1) {
           k3.innerHTML = "–";
           k3s.innerHTML = "Escolha uma opção e envie";
@@ -449,204 +330,164 @@
         }
       }
 
-      // =========================================================
-      // SIGNIFICADO
-      // =========================================================
-      function enviarSignificado() {
-        // descobre qual quadrado está marcado
-        var escolhido = -1;
-        for (var i = 0; i < 5; i++) {
-          if (document.getElementById("s" + i).checked) {
-            escolhido = i;
-          }
+      function carregarDashboard() {
+        fetch("/painel/significados")
+          .then(function (res) { return res.json(); })
+          .then(function (dados) {
+            for (var i = 0; i < significados.length; i++) {
+              var item = dados.find(function (registro) { return registro.nome == significados[i]; });
+              votosSig[i] = item ? Number(item.votos) : 0;
+            }
+            graficoSig.update();
+          });
+
+        fetch("/painel/competencias")
+          .then(function (res) { return res.json(); })
+          .then(function (dados) {
+            for (var i = 0; i < competencias.length; i++) {
+              var item = dados.find(function (registro) { return registro.nome == competencias[i]; });
+              votosComp[i] = item ? Number(item.votos) : 0;
+            }
+            graficoComp.update();
+          });
+
+        fetch("/painel/habilidades/media")
+          .then(function (res) { return res.json(); })
+          .then(function (dados) {
+            for (var i = 0; i < nomesHab.length; i++) {
+              var item = dados.find(function (registro) { return registro.nome == nomesHab[i]; });
+              mediasHab[i] = item ? Number(item.nivel) : 0;
+            }
+            graficoRadar.update();
+          });
+
+        if (idUsuario) {
+          fetch("/painel/significados/" + idUsuario)
+            .then(function (res) { return res.json(); })
+            .then(function (dados) {
+              if (dados.length > 0) {
+                meuSig = significados.indexOf(dados[0].nome);
+                if (meuSig >= 0) document.getElementById("s" + meuSig).checked = true;
+                sigAviso.style.display = "block";
+                for (var i = 0; i < coresSig.length; i++) coresSig[i] = "#a9bd7c";
+                if (meuSig >= 0) coresSig[meuSig] = "#334512";
+                graficoSig.update();
+              }
+              atualizarKPIs();
+            });
+
+          fetch("/painel/habilidades/" + idUsuario)
+            .then(function (res) { return res.json(); })
+            .then(function (dados) {
+              for (var i = 0; i < nomesHab.length; i++) {
+                var item = dados.find(function (registro) { return registro.nome == nomesHab[i]; });
+                notas[i] = item ? Number(item.nivel) : 0;
+                document.getElementById("h" + i).value = item ? item.nivel : "";
+              }
+              atualizarKPIs();
+            });
+
+          fetch("/painel/competencias/" + idUsuario)
+            .then(function (res) { return res.json(); })
+            .then(function (dados) {
+              for (var i = 0; i < competencias.length; i++) {
+                minhasComp[i] = dados.some(function (registro) { return registro.nome == competencias[i]; });
+                document.getElementById("c" + i).checked = minhasComp[i];
+              }
+              atualizarKPIs();
+            });
         }
 
-        if (escolhido == -1) {
-          alert("Escolha uma opção antes de enviar");
-          return;
-        }
-
-        // se já tinha votado antes, tira o voto antigo
-        if (meuSig != -1) {
-          votosSig[meuSig] = votosSig[meuSig] - 1;
-        }
-
-        // DEPOIS: aqui você faz um POST (fetch) para salvar no banco
-        meuSig = escolhido;
-        votosSig[escolhido] = votosSig[escolhido] + 1;
-
-        sigAviso.style.display = "block";
-
-        // todas as colunas claras, só a minha fica escura
-        for (var k = 0; k < 5; k++) {
-          coresSig[k] = "#a9bd7c";
-        }
-        coresSig[escolhido] = "#334512";
-
-        graficoSig.update();
-        atualizarKPIs();
+        fetch("/painel/comentarios")
+          .then(function (res) { return res.json(); })
+          .then(function (dados) {
+            comentarios = dados;
+            for (var i = 0; i < comentarios.length; i++) {
+              if (idUsuario && comentarios[i].idUsuario == idUsuario) {
+                jaComentei = true;
+                meuTexto = comentarios[i].texto;
+                cForm.style.display = "none";
+                cAviso.style.display = "block";
+              }
+              comentarios[i].texto = limpar(comentarios[i].texto);
+            }
+            mostrarComentarios();
+          });
       }
 
-      // =========================================================
-      // HABILIDADES
-      // =========================================================
+      function enviarSignificado() {
+        var escolhido = -1;
+        for (var i = 0; i < 5; i++) if (document.getElementById("s" + i).checked) escolhido = i;
+        if (escolhido == -1) { alert("Escolha uma opção antes de enviar"); return; }
+        if (!idUsuario) { alert("Faça login para enviar seu significado."); return; }
+        fetch("/painel/significados", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ idUsuarioServer: idUsuario, significadoServer: significados[escolhido] }) })
+          .then(function (res) { if (!res.ok) throw new Error("Não foi possível salvar o significado."); meuSig = escolhido; sigAviso.style.display = "block"; carregarDashboard(); })
+          .catch(function (erro) { alert(erro.message); });
+      }
 
-      // roda toda vez que a pessoa digita uma nota
       function mudouHabilidade() {
         for (var i = 0; i < 8; i++) {
           var campo = document.getElementById("h" + i);
           var valor = Number(campo.value);
-
-          // não deixa passar de 100 nem ficar abaixo de 0
-          if (valor > 100) {
-            valor = 100;
-            campo.value = 100;
-          }
-          if (valor < 0) {
-            valor = 0;
-            campo.value = 0;
-          }
-
+          if (campo.value == "") valor = 0;
+          if (valor > 100) { valor = 100; campo.value = 100; }
+          if (valor < 0) { valor = 0; campo.value = 0; }
           notas[i] = valor;
         }
-
-        graficoRadar.update();
         atualizarKPIs();
       }
 
       function salvarHabilidades() {
-        // DEPOIS: aqui você faz um POST (fetch) para salvar as notas no banco
-        sAviso.style.display = "block";
+        if (!idUsuario) { alert("Faça login para salvar suas habilidades."); return; }
+        var lista = [];
+        for (var i = 0; i < nomesHab.length; i++) lista.push({ nome: nomesHab[i], nivel: notas[i] });
+        fetch("/painel/habilidades", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ idUsuarioServer: idUsuario, habilidadesServer: lista }) })
+          .then(function (res) { if (!res.ok) throw new Error("Não foi possível salvar suas habilidades."); sAviso.style.display = "block"; carregarDashboard(); })
+          .catch(function (erro) { alert(erro.message); });
       }
 
-      // =========================================================
-      // COMPETÊNCIAS
-      // =========================================================
       function enviarCompetencias() {
-        // conta quantos quadrados estão marcados
-        var marcadas = 0;
-        for (var i = 0; i < 6; i++) {
-          if (document.getElementById("c" + i).checked) {
-            marcadas = marcadas + 1;
-          }
-        }
-
-        if (marcadas == 0) {
-          alert("Marque pelo menos uma competência antes de enviar");
-          return;
-        }
-
-        // DEPOIS: aqui você faz um POST (fetch) para salvar no banco
-        for (var j = 0; j < 6; j++) {
-          // tira o voto antigo (se tinha)
-          if (minhasComp[j] == true) {
-            votosComp[j] = votosComp[j] - 1;
-          }
-
-          // coloca o voto novo (se está marcado)
-          minhasComp[j] = document.getElementById("c" + j).checked;
-          if (minhasComp[j] == true) {
-            votosComp[j] = votosComp[j] + 1;
-          }
-        }
-
-        compAviso.style.display = "block";
-
-        graficoComp.update();
-        atualizarKPIs();
+        var selecionadas = [];
+        for (var i = 0; i < competencias.length; i++) if (document.getElementById("c" + i).checked) selecionadas.push(competencias[i]);
+        if (selecionadas.length == 0) { alert("Marque pelo menos uma competência antes de enviar"); return; }
+        if (!idUsuario) { alert("Faça login para enviar competências."); return; }
+        fetch("/painel/competencias", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ idUsuarioServer: idUsuario, competenciasServer: selecionadas }) })
+          .then(function (res) { if (!res.ok) throw new Error("Não foi possível salvar as competências."); compAviso.style.display = "block"; carregarDashboard(); })
+          .catch(function (erro) { alert(erro.message); });
       }
 
-      // =========================================================
-      // COMENTÁRIO
-      // =========================================================
+      function limpar(texto) { return texto.replaceAll("<", "&lt;").replaceAll(">", "&gt;"); }
+      function contarLetras() { cContador.innerHTML = cTexto.value.length + "/250"; }
 
-      // Troca "<" por "&lt;" para ninguém digitar código HTML no campo
-      function limpar(texto) {
-        return texto.replaceAll("<", "&lt;");
-      }
-
-      function contarLetras() {
-        cContador.innerHTML = cTexto.value.length + "/250";
-      }
-
-      // desenha os comentários dentro do <div id="cLista2">
       function mostrarComentarios() {
         var html = "";
-
-        if (comentarios.length == 0) {
-          html = '<p class="vazio">Nenhum comentário ainda.</p>';
-        }
-
+        if (comentarios.length == 0) html = '<p class="vazio">Nenhum comentário ainda.</p>';
         for (var i = 0; i < comentarios.length; i++) {
-          html += '<div class="cm">';
-          html +=
-            "<b>" +
-            comentarios[i].nome +
-            "</b><small>" +
-            comentarios[i].data +
-            "</small>";
-          html += "<div>" + comentarios[i].texto + "</div>";
-          html += "</div>";
+          html += '<div class="cm"><b>' + limpar(comentarios[i].nome) + '</b><small>' + comentarios[i].data + '</small><div>' + limpar(comentarios[i].texto) + '</div></div>';
         }
-
         cLista2.innerHTML = html;
       }
 
       function publicarComentario() {
-        var texto = cTexto.value;
-
-        if (texto == "") {
-          alert("Escreva seu comentário");
-          return;
-        }
-        if (jaComentei == true) {
-          return;
-        }
-
-        // DEPOIS: aqui você faz um POST (fetch) para salvar no banco
-        var hoje = new Date().toLocaleDateString("pt-BR");
-        comentarios.push({ nome: "Você", texto: limpar(texto), data: hoje });
-        meuTexto = texto;
-        jaComentei = true;
-
-        cForm.style.display = "none";
-        cAviso.style.display = "block";
-        mostrarComentarios();
+        var texto = cTexto.value.trim();
+        if (texto == "") { alert("Escreva seu comentário"); return; }
+        if (jaComentei) return;
+        if (!idUsuario) { alert("Faça login para publicar um comentário."); return; }
+        fetch("/painel/comentarios", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ idUsuarioServer: idUsuario, textoServer: texto }) })
+          .then(function (res) { if (!res.ok) throw new Error("Não foi possível publicar. Talvez você já tenha um comentário."); meuTexto = texto; jaComentei = true; cForm.style.display = "none"; cAviso.style.display = "block"; carregarDashboard(); })
+          .catch(function (erro) { alert(erro.message); });
       }
 
-      // Por enquanto só existe o comentário da própria pessoa, então
-      // para remover é só esvaziar a lista. Quando os comentários vierem
-      // do banco (de outras pessoas também), esta parte muda.
       function removerMeuComentario() {
-        comentarios = [];
-        jaComentei = false;
-
-        // DEPOIS: aqui você faz um DELETE (fetch) no banco
-
-        cForm.style.display = "block";
-        cAviso.style.display = "none";
-        mostrarComentarios();
+        if (!idUsuario) return;
+        fetch("/painel/comentarios/" + idUsuario, { method: "DELETE" })
+          .then(function (res) { if (!res.ok) throw new Error("Não foi possível apagar o comentário."); comentarios = comentarios.filter(function (comentario) { return comentario.idUsuario != idUsuario; }); jaComentei = false; cForm.style.display = "block"; cAviso.style.display = "none"; mostrarComentarios(); })
+          .catch(function (erro) { alert(erro.message); });
       }
+      function editarComentario() { var antigo = meuTexto; removerMeuComentario(); cTexto.value = antigo; contarLetras(); }
+      function apagarComentario() { removerMeuComentario(); cTexto.value = ""; contarLetras(); }
 
-      // Editar: apaga o antigo e já deixa o texto no campo para você mudar
-      function editarComentario() {
-        var antigo = meuTexto;
-        removerMeuComentario();
-        cTexto.value = antigo;
-        contarLetras();
-      }
-
-      // Apagar: apaga o antigo e deixa o campo vazio
-      function apagarComentario() {
-        removerMeuComentario();
-        cTexto.value = "";
-        contarLetras();
-      }
-
-      // =========================================================
-      // QUANDO A PÁGINA ABRE
-      // =========================================================
-      mostrarComentarios();
+      carregarDashboard();
       atualizarKPIs();
     </script>
   </body>

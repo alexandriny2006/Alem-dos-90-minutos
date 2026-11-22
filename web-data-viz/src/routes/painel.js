@@ -17,6 +17,10 @@ router.post("/significados", function (req, res) {
 });
 
 // ---------- HABILIDADES ----------
+router.get("/habilidades/media", function (req, res) {
+    painelController.listarMediaHabilidades(req, res);
+});
+
 router.get("/habilidades/:idUsuario", function (req, res) {
     painelController.listarHabilidades(req, res);
 });

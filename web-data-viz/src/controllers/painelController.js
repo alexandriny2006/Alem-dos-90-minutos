@@ -120,6 +120,17 @@ function salvarHabilidades(req, res) {
         });
 }
 
+function listarMediaHabilidades(req, res) {
+    painelModel.listarMediaHabilidades()
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            responderErro(res, "Houve um erro ao calcular a média das habilidades! Erro: ", erro);
+        });
+}
+
+
 // =========================================================
 // COMPETÊNCIAS
 // =========================================================
@@ -232,6 +243,7 @@ module.exports = {
     buscarMeuSignificado,
     enviarSignificado,
     listarHabilidades,
+    listarMediaHabilidades,
     salvarHabilidades,
     listarCompetencias,
     buscarMinhasCompetencias,

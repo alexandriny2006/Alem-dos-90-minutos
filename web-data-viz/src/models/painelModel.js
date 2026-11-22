@@ -82,6 +82,18 @@ function salvarHabilidades(idUsuario, habilidades) {
         });
 }
 
+// média das habilidades de todos os usuários (para o gráfico coletivo)
+function listarMediaHabilidades() {
+    var instrucaoSql = `
+        SELECT nome, ROUND(AVG(nivel), 0) AS nivel
+        FROM habilidade
+        GROUP BY nome
+        ORDER BY FIELD(nome, 'Velocidade', 'Finalização', 'Passe', 'Drible', 'Defesa', 'Força', 'Visão de jogo', 'Resistência');
+    `;
+    return database.executar(instrucaoSql);
+}
+
+
 // =========================================================
 // COMPETÊNCIAS
 // =========================================================
@@ -172,6 +184,7 @@ module.exports = {
     buscarMeuSignificado,
     enviarSignificado,
     listarHabilidades,
+    listarMediaHabilidades,
     salvarHabilidades,
     listarCompetencias,
     buscarMinhasCompetencias,
