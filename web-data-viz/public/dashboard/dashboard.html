@@ -52,7 +52,7 @@
         <h2>O que isso significa para você?</h2>
         <p class="sub">
           Clique em um quadrado e depois em enviar. Cada pessoa vota em apenas
-          um significado.
+          um significado, mas você pode trocar quando quiser.
         </p>
 
         <div class="comp">
@@ -88,16 +88,9 @@
               >
                 Enviar
               </button>
-              <button
-                class="button contorno"
-                type="button"
-                onclick="redefinirSignificado()"
-              >
-                Redefinir
-              </button>
             </div>
             <p class="aviso" id="sigAviso">
-              Voto enviado. Para trocar, clique em redefinir.
+              Voto enviado. Para trocar, escolha outra opção e clique em enviar.
             </p>
           </div>
 
@@ -212,16 +205,9 @@
               >
                 Enviar
               </button>
-              <button
-                class="button contorno"
-                type="button"
-                onclick="redefinirCompetencias()"
-              >
-                Redefinir
-              </button>
             </div>
             <p class="aviso" id="compAviso">
-              Competências enviadas. Para trocar, clique em redefinir.
+              Competências enviadas. Para trocar, marque outras e clique em enviar.
             </p>
           </div>
 
@@ -281,20 +267,19 @@
       // =========================================================
 
       // Significado (na mesma ordem dos quadrados do HTML)
-      const significados = [
+      var significados = [
         "Autoconhecimento",
         "Crescimento profissional",
         "Propósito",
         "Conexão com pessoas",
         "Liberdade",
       ];
-      const votosSig = [0, 0, 0, 0, 0];
-      const coresSig = ["#a9bd7c", "#a9bd7c", "#a9bd7c", "#a9bd7c", "#a9bd7c"]; // claras; só a do meu voto fica escura
-      let meuSig = -1; // -1 = ainda não enviei
-      let jaEnviouSig = false;
+      var votosSig = [0, 0, 0, 0, 0];
+      var coresSig = ["#a9bd7c", "#a9bd7c", "#a9bd7c", "#a9bd7c", "#a9bd7c"];
+      var meuSig = -1; // -1 = ainda não enviei
 
       // Habilidades (na mesma ordem dos campos do HTML)
-      const nomesHab = [
+      var nomesHab = [
         "Velocidade",
         "Finalização",
         "Passe",
@@ -304,10 +289,10 @@
         "Visão de jogo",
         "Resistência",
       ];
-      const notas = [0, 0, 0, 0, 0, 0, 0, 0];
+      var notas = [0, 0, 0, 0, 0, 0, 0, 0];
 
       // Competências (na mesma ordem dos quadrados do HTML)
-      const competencias = [
+      var competencias = [
         "Comunicação",
         "Trabalho em equipe",
         "Liderança",
@@ -315,30 +300,23 @@
         "Criatividade",
         "Organização",
       ];
-      const votosComp = [0, 0, 0, 0, 0, 0];
-      const minhasComp = [false, false, false, false, false, false];
-      let jaEnviouComp = false;
+      var votosComp = [0, 0, 0, 0, 0, 0];
+      var minhasComp = [false, false, false, false, false, false];
 
       // Comentário
-      const comentarios = [];
-      let jaComentei = false;
-      let meuTextoBruto = ""; // o texto que a pessoa digitou (para poder editar)
+      var comentarios = [];
+      var jaComentei = false;
+      var meuTexto = "";
 
       // =========================================================
-      // GRÁFICO DO SIGNIFICADO (colunas, sobem de baixo para cima)
+      // GRÁFICO DO SIGNIFICADO
       // =========================================================
-      const ctxSig = document.getElementById("sigCanvas");
+      var ctxSig = document.getElementById("sigCanvas");
 
-      const graficoSig = new Chart(ctxSig, {
+      var graficoSig = new Chart(ctxSig, {
         type: "bar",
         data: {
-          labels: [
-            ["Autoconhecimento"],
-            ["Crescimento", "profissional"],
-            ["Propósito"],
-            ["Conexão", "com pessoas"],
-            ["Liberdade"],
-          ],
+          labels: significados,
           datasets: [
             {
               label: "Votos",
@@ -357,30 +335,20 @@
             y: {
               beginAtZero: true,
               suggestedMax: 5,
-              ticks: { precision: 0 },
             },
           },
         },
       });
 
       // =========================================================
-      // GRÁFICO DAS HABILIDADES (radar, parecido com o do FIFA)
+      // GRÁFICO DAS HABILIDADES (radar)
       // =========================================================
-      const ctxRadar = document.getElementById("radarCanvas");
+      var ctxRadar = document.getElementById("radarCanvas");
 
-      const graficoRadar = new Chart(ctxRadar, {
+      var graficoRadar = new Chart(ctxRadar, {
         type: "radar",
         data: {
-          labels: [
-            "Velocidade",
-            "Finalização",
-            "Passe",
-            "Drible",
-            "Defesa",
-            "Força",
-            "Visão de jogo",
-            "Resistência",
-          ],
+          labels: nomesHab,
           datasets: [
             {
               label: "Suas habilidades",
@@ -400,35 +368,24 @@
             r: {
               min: 0,
               max: 100,
-              ticks: {
-                stepSize: 20,
-                color: "rgba(255, 255, 255, 0.45)",
-                backdropColor: "transparent",
-              },
-              grid: { color: "rgba(255, 255, 255, 0.15)" },
-              angleLines: { color: "rgba(255, 255, 255, 0.15)" },
-              pointLabels: { color: "white", font: { size: 13 } },
+              ticks: { display: false, stepSize: 20 },
+              grid: { color: "rgba(255, 255, 255, 0.2)" },
+              angleLines: { color: "rgba(255, 255, 255, 0.2)" },
+              pointLabels: { color: "white" },
             },
           },
         },
       });
 
       // =========================================================
-      // GRÁFICO DAS COMPETÊNCIAS (colunas, sobem de baixo para cima)
+      // GRÁFICO DAS COMPETÊNCIAS
       // =========================================================
-      const ctxComp = document.getElementById("compCanvas");
+      var ctxComp = document.getElementById("compCanvas");
 
-      const graficoComp = new Chart(ctxComp, {
+      var graficoComp = new Chart(ctxComp, {
         type: "bar",
         data: {
-          labels: [
-            ["Comunicação"],
-            ["Trabalho", "em equipe"],
-            ["Liderança"],
-            ["Resolução", "de problemas"],
-            ["Criatividade"],
-            ["Organização"],
-          ],
+          labels: competencias,
           datasets: [
             {
               label: "Votos",
@@ -447,52 +404,48 @@
             y: {
               beginAtZero: true,
               suggestedMax: 5,
-              ticks: { precision: 0 },
             },
           },
         },
       });
 
       // =========================================================
-      // KPIs
+      // KPIs (os 3 números do topo)
       // =========================================================
       function atualizarKPIs() {
         // KPI 1: habilidade de maior nota
-        let maiorIndice = 0;
-        for (let i = 1; i < notas.length; i++) {
+        var maiorIndice = 0;
+        for (var i = 1; i < notas.length; i++) {
           if (notas[i] > notas[maiorIndice]) {
             maiorIndice = i;
           }
         }
+
         if (notas[maiorIndice] == 0) {
-          document.getElementById("k1").textContent = "–";
-          document.getElementById("k1s").textContent =
-            "Preencha suas habilidades abaixo";
+          k1.innerHTML = "–";
+          k1s.innerHTML = "Preencha suas habilidades abaixo";
         } else {
-          document.getElementById("k1").textContent = notas[maiorIndice];
-          document.getElementById("k1s").textContent = nomesHab[maiorIndice];
+          k1.innerHTML = notas[maiorIndice];
+          k1s.innerHTML = nomesHab[maiorIndice];
         }
 
-        // KPI 2: quantas competências eu marquei
-        let quantas = 0;
-        for (let j = 0; j < minhasComp.length; j++) {
+        // KPI 2: quantas competências eu enviei
+        var quantas = 0;
+        for (var j = 0; j < 6; j++) {
           if (minhasComp[j] == true) {
             quantas = quantas + 1;
           }
         }
-        document.getElementById("k2").textContent = quantas;
-        document.getElementById("k2s").textContent =
-          "de " + competencias.length + " disponíveis";
+        k2.innerHTML = quantas;
+        k2s.innerHTML = "de " + competencias.length + " disponíveis";
 
         // KPI 3: significado que eu enviei
         if (meuSig == -1) {
-          document.getElementById("k3").textContent = "–";
-          document.getElementById("k3s").textContent =
-            "Escolha uma opção e envie";
+          k3.innerHTML = "–";
+          k3s.innerHTML = "Escolha uma opção e envie";
         } else {
-          document.getElementById("k3").textContent = significados[meuSig];
-          document.getElementById("k3s").textContent =
-            "O significado que você escolheu";
+          k3.innerHTML = significados[meuSig];
+          k3s.innerHTML = "O significado que você escolheu";
         }
       }
 
@@ -500,15 +453,10 @@
       // SIGNIFICADO
       // =========================================================
       function enviarSignificado() {
-        if (jaEnviouSig == true) {
-          return;
-        }
-
-        // descobre qual quadrado está pintado
-        const quadrados = document.getElementsByName("significado");
-        let escolhido = -1;
-        for (let i = 0; i < quadrados.length; i++) {
-          if (quadrados[i].checked) {
+        // descobre qual quadrado está marcado
+        var escolhido = -1;
+        for (var i = 0; i < 5; i++) {
+          if (document.getElementById("s" + i).checked) {
             escolhido = i;
           }
         }
@@ -518,52 +466,22 @@
           return;
         }
 
-        // Depois: aqui você faz um POST para salvar no banco
+        // se já tinha votado antes, tira o voto antigo
+        if (meuSig != -1) {
+          votosSig[meuSig] = votosSig[meuSig] - 1;
+        }
+
+        // DEPOIS: aqui você faz um POST (fetch) para salvar no banco
         meuSig = escolhido;
         votosSig[escolhido] = votosSig[escolhido] + 1;
-        jaEnviouSig = true;
 
-        // trava os quadrados e o botão (só um voto por pessoa)
-        for (let j = 0; j < quadrados.length; j++) {
-          quadrados[j].disabled = true;
-        }
-        document.getElementById("sigbutton").disabled = true;
-        document.getElementById("sigAviso").style.display = "block";
+        sigAviso.style.display = "block";
 
         // todas as colunas claras, só a minha fica escura
-        for (let k = 0; k < coresSig.length; k++) {
+        for (var k = 0; k < 5; k++) {
           coresSig[k] = "#a9bd7c";
         }
         coresSig[escolhido] = "#334512";
-
-        graficoSig.update();
-        atualizarKPIs();
-      }
-
-      function redefinirSignificado() {
-        // destrava e desmarca os quadrados
-        const quadrados = document.getElementsByName("significado");
-        for (let i = 0; i < quadrados.length; i++) {
-          quadrados[i].checked = false;
-          quadrados[i].disabled = false;
-        }
-
-        // se já tinha enviado: tira o meu voto
-        if (jaEnviouSig == true) {
-          votosSig[meuSig] = votosSig[meuSig] - 1;
-        }
-        meuSig = -1;
-        jaEnviouSig = false;
-
-        // Depois: aqui você faz um DELETE/UPDATE no banco
-
-        // todas as colunas voltam a ficar claras
-        for (let j = 0; j < coresSig.length; j++) {
-          coresSig[j] = "#a9bd7c";
-        }
-
-        document.getElementById("sigbutton").disabled = false;
-        document.getElementById("sigAviso").style.display = "none";
 
         graficoSig.update();
         atualizarKPIs();
@@ -575,9 +493,9 @@
 
       // roda toda vez que a pessoa digita uma nota
       function mudouHabilidade() {
-        for (let i = 0; i < 8; i++) {
-          const campo = document.getElementById("h" + i);
-          let valor = Number(campo.value);
+        for (var i = 0; i < 8; i++) {
+          var campo = document.getElementById("h" + i);
+          var valor = Number(campo.value);
 
           // não deixa passar de 100 nem ficar abaixo de 0
           if (valor > 100) {
@@ -597,21 +515,17 @@
       }
 
       function salvarHabilidades() {
-        // Depois: aqui você faz um POST para salvar as notas no banco
-        document.getElementById("sAviso").style.display = "block";
+        // DEPOIS: aqui você faz um POST (fetch) para salvar as notas no banco
+        sAviso.style.display = "block";
       }
 
       // =========================================================
       // COMPETÊNCIAS
       // =========================================================
       function enviarCompetencias() {
-        if (jaEnviouComp == true) {
-          return;
-        }
-
-        // conta quantos quadrados estão pintados
-        let marcadas = 0;
-        for (let i = 0; i < 6; i++) {
+        // conta quantos quadrados estão marcados
+        var marcadas = 0;
+        for (var i = 0; i < 6; i++) {
           if (document.getElementById("c" + i).checked) {
             marcadas = marcadas + 1;
           }
@@ -622,42 +536,21 @@
           return;
         }
 
-        // Depois: aqui você faz um POST para salvar no banco
-        for (let j = 0; j < 6; j++) {
-          const caixa = document.getElementById("c" + j);
-          if (caixa.checked) {
-            minhasComp[j] = true;
+        // DEPOIS: aqui você faz um POST (fetch) para salvar no banco
+        for (var j = 0; j < 6; j++) {
+          // tira o voto antigo (se tinha)
+          if (minhasComp[j] == true) {
+            votosComp[j] = votosComp[j] - 1;
+          }
+
+          // coloca o voto novo (se está marcado)
+          minhasComp[j] = document.getElementById("c" + j).checked;
+          if (minhasComp[j] == true) {
             votosComp[j] = votosComp[j] + 1;
           }
-          caixa.disabled = true; // trava os quadrados
         }
-        jaEnviouComp = true;
 
-        document.getElementById("compbutton").disabled = true;
-        document.getElementById("compAviso").style.display = "block";
-
-        graficoComp.update();
-        atualizarKPIs();
-      }
-
-      function redefinirCompetencias() {
-        // destrava e desmarca os quadrados; tira os meus votos
-        for (let i = 0; i < 6; i++) {
-          const caixa = document.getElementById("c" + i);
-          caixa.checked = false;
-          caixa.disabled = false;
-
-          if (minhasComp[i] == true) {
-            minhasComp[i] = false;
-            votosComp[i] = votosComp[i] - 1;
-          }
-        }
-        jaEnviouComp = false;
-
-        // Depois: aqui você faz um DELETE no banco
-
-        document.getElementById("compbutton").disabled = false;
-        document.getElementById("compAviso").style.display = "none";
+        compAviso.style.display = "block";
 
         graficoComp.update();
         atualizarKPIs();
@@ -667,25 +560,24 @@
       // COMENTÁRIO
       // =========================================================
 
-      // Troca "<" por "&lt;" para ninguém digitar código no campo
+      // Troca "<" por "&lt;" para ninguém digitar código HTML no campo
       function limpar(texto) {
-        return texto.replace(/</g, "&lt;");
+        return texto.replaceAll("<", "&lt;");
       }
 
       function contarLetras() {
-        const tamanho = document.getElementById("cTexto").value.length;
-        document.getElementById("cContador").textContent = tamanho + "/250";
+        cContador.innerHTML = cTexto.value.length + "/250";
       }
 
       // desenha os comentários dentro do <div id="cLista2">
       function mostrarComentarios() {
-        let html = "";
+        var html = "";
 
         if (comentarios.length == 0) {
           html = '<p class="vazio">Nenhum comentário ainda.</p>';
         }
 
-        for (let i = 0; i < comentarios.length; i++) {
+        for (var i = 0; i < comentarios.length; i++) {
           html += '<div class="cm">';
           html +=
             "<b>" +
@@ -696,13 +588,14 @@
           html += "<div>" + comentarios[i].texto + "</div>";
           html += "</div>";
         }
-        document.getElementById("cLista2").innerHTML = html;
+
+        cLista2.innerHTML = html;
       }
 
       function publicarComentario() {
-        const bruto = document.getElementById("cTexto").value;
+        var texto = cTexto.value;
 
-        if (bruto == "") {
+        if (texto == "") {
           alert("Escreva seu comentário");
           return;
         }
@@ -710,46 +603,43 @@
           return;
         }
 
-        // Depois: aqui você faz um POST para salvar no banco
-        const hoje = new Date().toLocaleDateString("pt-BR");
-        comentarios.unshift({ nome: "Você", texto: limpar(bruto), data: hoje });
-        meuTextoBruto = bruto;
+        // DEPOIS: aqui você faz um POST (fetch) para salvar no banco
+        var hoje = new Date().toLocaleDateString("pt-BR");
+        comentarios.push({ nome: "Você", texto: limpar(texto), data: hoje });
+        meuTexto = texto;
         jaComentei = true;
 
-        document.getElementById("cForm").style.display = "none";
-        document.getElementById("cAviso").style.display = "block";
+        cForm.style.display = "none";
+        cAviso.style.display = "block";
         mostrarComentarios();
       }
 
-      // tira o meu comentário da lista e volta o campo de escrever
+      // Por enquanto só existe o comentário da própria pessoa, então
+      // para remover é só esvaziar a lista. Quando os comentários vierem
+      // do banco (de outras pessoas também), esta parte muda.
       function removerMeuComentario() {
-        for (let i = 0; i < comentarios.length; i++) {
-          if (comentarios[i].nome == "Você") {
-            comentarios.splice(i, 1);
-            break;
-          }
-        }
+        comentarios = [];
         jaComentei = false;
 
-        // Depois: aqui você faz um DELETE no banco
+        // DEPOIS: aqui você faz um DELETE (fetch) no banco
 
-        document.getElementById("cForm").style.display = "block";
-        document.getElementById("cAviso").style.display = "none";
+        cForm.style.display = "block";
+        cAviso.style.display = "none";
         mostrarComentarios();
       }
 
       // Editar: apaga o antigo e já deixa o texto no campo para você mudar
       function editarComentario() {
-        const antigo = meuTextoBruto;
+        var antigo = meuTexto;
         removerMeuComentario();
-        document.getElementById("cTexto").value = antigo;
+        cTexto.value = antigo;
         contarLetras();
       }
 
       // Apagar: apaga o antigo e deixa o campo vazio
       function apagarComentario() {
         removerMeuComentario();
-        document.getElementById("cTexto").value = "";
+        cTexto.value = "";
         contarLetras();
       }
 

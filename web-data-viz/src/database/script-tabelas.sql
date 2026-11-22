@@ -78,6 +78,11 @@ INSERT INTO usuario_competencia (fkUsuario, fkCompetencia) VALUES
   
 INSERT INTO comentario (texto, data_publicacao, fkUsuario) VALUES
   ('Futebol pra mim vai além dos 90 minutos', '2026-11-18', 1);
+  
+  
+  
+-- usuario_competencia para competencia
+-- comentario para usuario
 
 SELECT s.nomeSignificado, 
 u.nome
@@ -98,3 +103,5 @@ SELECT u.nome, c.nome AS competencia
 FROM usuario u
 JOIN usuario_competencia uc ON uc.fkUsuario = u.idUsuario
 JOIN competencia c ON c.idCompetencia = uc.fkCompetencia;
+	SELECT * FROM usuario;
+    DELETE FROM usuario WHERE idUsuario = 18
