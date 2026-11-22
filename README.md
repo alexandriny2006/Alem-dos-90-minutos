@@ -14,20 +14,15 @@ Uma experiência que conecta futebol, opiniões e sentimentos.
 
 <div align="center">
   <img src="https://img.shields.io/badge/Projeto-Acad%C3%AAmico-124D27?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Status-Em%20desenvolvimento-3F8F50?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/JavaScript-031100?style=for-the-badge&logo=javascript&logoColor=F7DF1E" />
-  <img src="https://img.shields.io/badge/MySQL-124D27?style=for-the-badge&logo=mysql&logoColor=white" />
 </div>
 
 ---
 
-## 📌 Sobre o projeto
+## 📌 Sobre o tema do projeto
 
-O **Além dos 90 Minutos** é um projeto desenvolvido com o objetivo de explorar o futebol para além das quatro linhas, permitindo que os usuários expressem suas opiniões, compartilhem seus sentimentos e visualizem informações relacionadas à percepção coletiva sobre o universo do futebol.
+O tema deste projeto surgiu com uma simples pergunta "O futebol é apenas dentro de campo? " muitas pessoas podem pensar que sim, que são partidas divididas por 2 tempos de 45 minutos totalizando 90, dentro disso sendo apenas chutar uma bola, fazer gols e vencer uma partida. Mas, vai além dos 90 minutos.  
 
-A proposta é proporcionar uma experiência interativa, reunindo opiniões individuais e coletivas em uma interface visual, aproximando o torcedor de diferentes perspectivas sobre o esporte.
-
----
+O futebol vai além dos 90 minutos porque vem desde um certo começo, talvez sendo sem bola no pé, mas vendo alguém jogar e ter a curiosidade de saber o que é aquele esporte, logo a pessoa pelo seu interesse começa a jogar e ver pessoas jogando, que desperta interesses ou até sonhos.  
 
 ## ✨ Funcionalidades
 
