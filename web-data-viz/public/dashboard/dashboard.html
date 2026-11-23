@@ -267,9 +267,7 @@
             </p>
           </div>
 
-          <div class="grafico">
-            <canvas id="compCanvas"></canvas>
-          </div>
+          <div id="compMedias" class="comp-medias"></div>
         </div>
       </section>
 
@@ -317,7 +315,7 @@
       </section>
     </main>
 
-    <script>
+   <script>
       // Dados coletivos carregados do banco e dados individuais da conta logada
       var significados = [
         "Autoconhecimento",
@@ -455,53 +453,6 @@
         },
       });
 
-      // 3. Competências: votos da comunidade (verde claro) e seleção individual (verde escuro)
-      const ctxComp = document.getElementById("compCanvas");
-
-      var graficoComp = new Chart(ctxComp, {
-        type: "bar",
-        data: {
-          labels: competencias,
-          datasets: [
-            {
-              label: "Voto da comunidade",
-              data: votosComp,
-              backgroundColor: "#a9bd7c",
-              borderWidth: 1,
-            },
-            {
-              label: "Seu voto",
-              data: votoIndividualComp,
-              backgroundColor: "#334512",
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: true,
-              labels: {
-                color: "black",
-              },
-            },
-          },
-          scales: {
-            x: {
-              stacked: true,
-            },
-            y: {
-              stacked: true,
-              beginAtZero: true,
-              ticks: {
-                precision: 0,
-              },
-            },
-          },
-        },
-      });
-
       function atualizarGraficoSignificado() {
         var comunidade = votosSig.slice();
 
@@ -523,18 +474,25 @@
       }
 
       function atualizarGraficoCompetencias() {
-        var comunidade = votosComp.slice();
+        var area = document.getElementById("compMedias");
+        area.innerHTML = "";
 
-        for (var i = 0; i < minhasComp.length; i++) {
-          votoIndividualComp[i] = minhasComp[i] ? 1 : 0;
-
-          if (minhasComp[i] && comunidade[i] > 0) {
-            comunidade[i]--;
+        for (var i = 0; i < competencias.length; i++) {
+          var percentual = votosComp[i];
+          var marcada = minhasComp[i];
+          var item = document.createElement("div");
+          item.className = "comp-media-item";
+          var textoMarcada = "Média da comunidade";
+          if (marcada) {
+            textoMarcada = "Você marcou esta competência";
           }
+          item.innerHTML =
+            '<div class="comp-media-topo"><strong>' + competencias[i] + '</strong>' +
+            '<span>' + percentual + '%</span></div>' +
+            '<div class="comp-media-barra"><div style="width: ' + percentual + '%"></div></div>' +
+            '<small>' + textoMarcada + '</small>';
+          area.appendChild(item);
         }
-
-        graficoComp.data.datasets[0].data = comunidade;
-        graficoComp.update();
       }
 
       function atualizarKPIs() {
@@ -584,7 +542,11 @@
               var item = dados.find(function (registro) {
                 return registro.nome == significados[i];
               });
-              votosSig[i] = item ? Number(item.votos) : 0;
+              if (item) {
+              votosSig[i] = Number(item.votos);
+            } else {
+              votosSig[i] = 0;
+            }
             }
             atualizarGraficoSignificado();
           });
@@ -598,7 +560,11 @@
               var item = dados.find(function (registro) {
                 return registro.nome == competencias[i];
               });
-              votosComp[i] = item ? Number(item.votos) : 0;
+              if (item) {
+              votosComp[i] = Number(item.media);
+            } else {
+              votosComp[i] = 0;
+            }
             }
             atualizarGraficoCompetencias();
           });
@@ -636,8 +602,16 @@
                 var item = dados.find(function (registro) {
                   return registro.nome == nomesHab[i];
                 });
-                notas[i] = item ? Number(item.nivel) : 0;
-                document.getElementById("h" + i).value = item ? item.nivel : "";
+                if (item) {
+                notas[i] = Number(item.nivel);
+              } else {
+                notas[i] = 0;
+              }
+                if (item) {
+                document.getElementById("h" + i).value = item.nivel;
+              } else {
+                document.getElementById("h" + i).value = "";
+              }
               }
               graficoRadar.data.datasets[0].data = notas;
               graficoRadar.update();
@@ -653,7 +627,11 @@
                 minhasComp[i] = dados.some(function (registro) {
                   return registro.nome == competencias[i];
                 });
-                votoIndividualComp[i] = minhasComp[i] ? 1 : 0;
+                if (minhasComp[i]) {
+                  votoIndividualComp[i] = 1;
+                } else {
+                  votoIndividualComp[i] = 0;
+                }
                 document.getElementById("c" + i).checked = minhasComp[i];
               }
               atualizarGraficoCompetencias();

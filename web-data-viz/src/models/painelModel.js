@@ -85,11 +85,11 @@ function salvarHabilidades(idUsuario, habilidades) {
 // média das habilidades de todos os usuários (para o gráfico coletivo)
 function listarMediaHabilidades() {
     var instrucaoSql = `
-        SELECT nome, ROUND(AVG(nivel), 0) AS nivel
-        FROM habilidade
-        GROUP BY nome
-        ORDER BY FIELD(nome, 'Velocidade', 'Finalização', 'Passe', 'Drible', 'Defesa', 'Força', 'Visão de jogo', 'Resistência');
-    `;
+            SELECT nome, ROUND(AVG(nivel), 0) AS nivel
+            FROM habilidade
+            GROUP BY nome
+            ORDER BY FIELD(nome, 'Velocidade', 'Finalização', 'Passe', 'Drible', 'Defesa', 'Força', 'Visão de jogo', 'Resistência');
+        `;
     return database.executar(instrucaoSql);
 }
 
@@ -102,7 +102,9 @@ function listarMediaHabilidades() {
 function listarCompetencias() {
     console.log("ACESSEI O PAINEL MODEL \n function listarCompetencias()");
     var instrucaoSql = `
-        SELECT c.nome, COUNT(uc.fkUsuario) AS votos
+        SELECT c.nome,
+               COUNT(uc.fkUsuario) AS votos,
+               ROUND((COUNT(uc.fkUsuario) / (SELECT COUNT(*) FROM usuario)) * 100, 0) AS media
         FROM competencia c
         LEFT JOIN usuario_competencia uc ON uc.fkCompetencia = c.idCompetencia
         GROUP BY c.idCompetencia, c.nome

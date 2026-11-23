@@ -373,3 +373,44 @@ textarea:focus {
 .vazio {
     color: black;
 }
+.comp-medias {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.comp-media-item {
+    background: #f3f5ef;
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.comp-media-topo {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+    color: #111;
+}
+
+.comp-media-topo span {
+    font-weight: bold;
+}
+
+.comp-media-barra {
+    height: 12px;
+    background: #d9dfd0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.comp-media-barra div {
+    height: 100%;
+    background: #a9bd7c;
+    border-radius: 20px;
+}
+.comp-media-item small {
+    display: block;
+    margin-top: 7px;
+    color: #334512;
+}
