@@ -221,8 +221,8 @@
       <section class="panel">
         <h2>Competências</h2>
         <p class="sub">
-          Marque as competências que o futebol te deu. O gráfico compara suas marcações com
-          a quantidade de pessoas da comunidade que marcou cada competência.
+          Marque as competências que o futebol te deu. As barras mostram a média da
+          comunidade: a porcentagem de cada competência dentro do total de marcações.
         </p>
 
         <div class="comp">
@@ -478,7 +478,7 @@
         area.innerHTML = "";
 
         for (var i = 0; i < competencias.length; i++) {
-          var percentual = votosComp[i];
+          var percentual = Number(votosComp[i]) || 0;
           var marcada = minhasComp[i];
           var item = document.createElement("div");
           item.className = "comp-media-item";
@@ -535,38 +535,56 @@
       function carregarDashboard() {
         fetch("/painel/significados")
           .then(function (res) {
+            if (!res.ok) {
+              throw new Error("Erro ao buscar significados: " + res.status);
+            }
             return res.json();
           })
           .then(function (dados) {
+            if (!Array.isArray(dados)) {
+              throw new Error("Resposta inesperada de /painel/significados");
+            }
             for (var i = 0; i < significados.length; i++) {
               var item = dados.find(function (registro) {
                 return registro.nome == significados[i];
               });
               if (item) {
-              votosSig[i] = Number(item.votos);
-            } else {
-              votosSig[i] = 0;
-            }
+                votosSig[i] = Number(item.votos);
+              } else {
+                votosSig[i] = 0;
+              }
             }
             atualizarGraficoSignificado();
+          })
+          .catch(function (erro) {
+            console.error(erro);
           });
 
         fetch("/painel/competencias")
           .then(function (res) {
+            if (!res.ok) {
+              throw new Error("Erro ao buscar competências: " + res.status);
+            }
             return res.json();
           })
           .then(function (dados) {
+            if (!Array.isArray(dados)) {
+              throw new Error("Resposta inesperada de /painel/competencias");
+            }
             for (var i = 0; i < competencias.length; i++) {
               var item = dados.find(function (registro) {
                 return registro.nome == competencias[i];
               });
               if (item) {
-              votosComp[i] = Number(item.media);
-            } else {
-              votosComp[i] = 0;
-            }
+                votosComp[i] = Number(item.media);
+              } else {
+                votosComp[i] = 0;
+              }
             }
             atualizarGraficoCompetencias();
+          })
+          .catch(function (erro) {
+            console.error(erro);
           });
 
         if (idUsuario) {

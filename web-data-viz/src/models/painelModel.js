@@ -99,12 +99,20 @@ function listarMediaHabilidades() {
 // =========================================================
 
 // quantas pessoas marcaram cada competência (para o gráfico)
+// votos e porcentagem de cada competência (para o gráfico)
+// media = votos da competência ÷ total de votos de TODAS as competências × 100
+// (1 voto no total = 100%; 2 votos em competências diferentes = 50/50...)
 function listarCompetencias() {
     console.log("ACESSEI O PAINEL MODEL \n function listarCompetencias()");
     var instrucaoSql = `
         SELECT c.nome,
                COUNT(uc.fkUsuario) AS votos,
-               ROUND((COUNT(uc.fkUsuario) / (SELECT COUNT(*) FROM usuario)) * 100, 0) AS media
+               COALESCE(
+                   ROUND(
+                       COUNT(uc.fkUsuario) * 100
+                       / NULLIF((SELECT COUNT(*) FROM usuario_competencia), 0),
+                   1),
+               0) AS media
         FROM competencia c
         LEFT JOIN usuario_competencia uc ON uc.fkCompetencia = c.idCompetencia
         GROUP BY c.idCompetencia, c.nome
