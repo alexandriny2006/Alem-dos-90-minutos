@@ -10,7 +10,6 @@
   </head>
 
   <body>
-    <!-- ========== CABEÇALHO ========== -->
     <header class="header">
       <nav>
         <a href="#home">
@@ -27,7 +26,6 @@
       <h1>Meu painel</h1>
       <p class="sub">Veja como a comunidade se enxerga e atualize seu perfil</p>
 
-      <!-- ========== 3 KPIs ========== -->
       <section class="kpis" aria-label="Indicadores">
         <div class="kpi">
           <div class="num" id="k1">–</div>
@@ -48,7 +46,6 @@
         </div>
       </section>
 
-      <!-- ========== SIGNIFICADO ========== -->
       <section class="panel">
         <h2>O que isso significa para você?</h2>
         <p class="sub">
@@ -57,7 +54,6 @@
         </p>
 
         <div class="comp">
-          <!-- ESQUERDA: as opções e os botões -->
           <div>
             <div class="row">
               <input type="radio" name="significado" id="s0" />
@@ -95,7 +91,6 @@
             </p>
           </div>
 
-          <!-- DIREITA: o gráfico (sempre visível) -->
           <div>
             <div class="grafico">
               <canvas id="sigCanvas"></canvas>
@@ -104,7 +99,6 @@
         </div>
       </section>
 
-      <!-- ========== HABILIDADES (painel escuro) ========== -->
       <section class="panel escuro">
         <h2>Minhas habilidades</h2>
         <p class="sub">
@@ -217,7 +211,6 @@
         </div>
       </section>
 
-      <!-- ========== COMPETÊNCIAS ========== -->
       <section class="panel">
         <h2>Competências</h2>
         <p class="sub">
@@ -271,7 +264,6 @@
         </div>
       </section>
 
-      <!-- ========== COMENTÁRIO ========== -->
       <section class="panel">
         <h2>Seu comentário</h2>
         <p class="sub">
@@ -310,13 +302,11 @@
           </div>
         </div>
 
-        <!-- AQUI aparece o comentário publicado -->
         <div id="cLista2"></div>
       </section>
     </main>
 
    <script>
-      // Dados coletivos carregados do banco e dados individuais da conta logada
       var significados = [
         "Autoconhecimento",
         "Crescimento profissional",
@@ -356,7 +346,6 @@
       var meuTexto = "";
       var idUsuario = sessionStorage.ID_USUARIO;
 
-      // 1. Significado: votos da comunidade (verde claro) e voto individual (verde escuro)
       const ctxSig = document.getElementById("sigCanvas");
 
       var graficoSig = new Chart(ctxSig, {
@@ -403,7 +392,6 @@
         },
       });
 
-      // 2. Habilidades: somente as notas da pessoa logada
       const ctxRadar = document.getElementById("radarCanvas");
 
       var graficoRadar = new Chart(ctxRadar, {

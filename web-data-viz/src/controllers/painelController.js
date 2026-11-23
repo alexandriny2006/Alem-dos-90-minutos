@@ -1,14 +1,9 @@
 var painelModel = require("../models/painelModel");
 
-// mostra o erro no terminal e devolve erro 500 para o navegador
 function responderErro(res, mensagem, erro) {
     console.log("\n" + mensagem, erro);
     res.status(500).json(erro.sqlMessage || erro.message);
 }
-
-// =========================================================
-// SIGNIFICADO
-// =========================================================
 
 function listarSignificados(req, res) {
     painelModel.listarSignificados()
@@ -47,7 +42,6 @@ function enviarSignificado(req, res) {
     } else {
         painelModel.enviarSignificado(idUsuario, significado)
             .then(function (resultado) {
-                // 0 linhas = não achou o usuário ou o nome do significado
                 if (resultado.affectedRows == 0) {
                     res.status(404).send("Usuário ou significado não encontrado!");
                 } else {
@@ -59,10 +53,6 @@ function enviarSignificado(req, res) {
             });
     }
 }
-
-// =========================================================
-// HABILIDADES
-// =========================================================
 
 function listarHabilidades(req, res) {
     var idUsuario = req.params.idUsuario;
@@ -93,7 +83,6 @@ function salvarHabilidades(req, res) {
         return;
     }
 
-    // confere cada habilidade: precisa de nome e de nota entre 0 e 100
     var lista = [];
     for (var i = 0; i < habilidades.length; i++) {
         var nome = habilidades[i].nome;
@@ -129,11 +118,6 @@ function listarMediaHabilidades(req, res) {
             responderErro(res, "Houve um erro ao calcular a média das habilidades! Erro: ", erro);
         });
 }
-
-
-// =========================================================
-// COMPETÊNCIAS
-// =========================================================
 
 function listarCompetencias(req, res) {
     painelModel.listarCompetencias()
@@ -180,10 +164,6 @@ function enviarCompetencias(req, res) {
     }
 }
 
-// =========================================================
-// COMENTÁRIO
-// =========================================================
-
 function listarComentarios(req, res) {
     painelModel.listarComentarios()
         .then(function (resultado) {
@@ -211,7 +191,6 @@ function publicarComentario(req, res) {
             })
             .catch(function (erro) {
                 if (erro.code == "ER_DUP_ENTRY") {
-                    // a coluna fkUsuario é UNIQUE: só 1 comentário por pessoa
                     res.status(409).send("Você já tem um comentário. Apague o atual para publicar outro.");
                 } else if (erro.code == "ER_NO_REFERENCED_ROW_2") {
                     res.status(404).send("Usuário não encontrado!");

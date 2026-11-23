@@ -1,14 +1,5 @@
 var database = require("../database/config");
 
-// Obs: os "?" nas instruções SQL são trocados pelos valores da lista que vai
-// junto (ex.: [idUsuario]). Assim o que a pessoa digita nunca vira parte do
-// comando SQL, e ninguém consegue "invadir" o banco pelo campo de texto.
-
-// =========================================================
-// SIGNIFICADO
-// =========================================================
-
-// quantos votos cada significado tem (para o gráfico)
 function listarSignificados() {
     console.log("ACESSEI O PAINEL MODEL \n function listarSignificados()");
     var instrucaoSql = `
@@ -21,7 +12,6 @@ function listarSignificados() {
     return database.executar(instrucaoSql);
 }
 
-// qual significado esta pessoa escolheu (volta vazio se ainda não escolheu)
 function buscarMeuSignificado(idUsuario) {
     console.log("ACESSEI O PAINEL MODEL \n function buscarMeuSignificado():", idUsuario);
     var instrucaoSql = `
@@ -33,7 +23,6 @@ function buscarMeuSignificado(idUsuario) {
     return database.executar(instrucaoSql, [idUsuario]);
 }
 
-// salva (ou troca) o significado da pessoa, procurando pelo NOME
 function enviarSignificado(idUsuario, nomeSignificado) {
     console.log("ACESSEI O PAINEL MODEL \n function enviarSignificado():", idUsuario, nomeSignificado);
     var instrucaoSql = `
@@ -45,11 +34,6 @@ function enviarSignificado(idUsuario, nomeSignificado) {
     return database.executar(instrucaoSql, [nomeSignificado, idUsuario]);
 }
 
-// =========================================================
-// HABILIDADES
-// =========================================================
-
-// as notas da pessoa
 function listarHabilidades(idUsuario) {
     console.log("ACESSEI O PAINEL MODEL \n function listarHabilidades():", idUsuario);
     var instrucaoSql = `
@@ -61,12 +45,9 @@ function listarHabilidades(idUsuario) {
     return database.executar(instrucaoSql, [idUsuario]);
 }
 
-// salva as notas: apaga as antigas da pessoa e grava as novas
-// "habilidades" é uma lista assim: [{ nome: "Passe", nivel: 80 }, ...]
 function salvarHabilidades(idUsuario, habilidades) {
     console.log("ACESSEI O PAINEL MODEL \n function salvarHabilidades():", idUsuario);
 
-    // cada linha vira [nome, nivel, idUsuario], na ordem das colunas do INSERT
     var linhas = [];
     for (var i = 0; i < habilidades.length; i++) {
         linhas.push([habilidades[i].nome, habilidades[i].nivel, idUsuario]);
@@ -82,7 +63,6 @@ function salvarHabilidades(idUsuario, habilidades) {
         });
 }
 
-// média das habilidades de todos os usuários (para o gráfico coletivo)
 function listarMediaHabilidades() {
     var instrucaoSql = `
             SELECT nome, ROUND(AVG(nivel), 0) AS nivel
@@ -93,15 +73,6 @@ function listarMediaHabilidades() {
     return database.executar(instrucaoSql);
 }
 
-
-// =========================================================
-// COMPETÊNCIAS
-// =========================================================
-
-// quantas pessoas marcaram cada competência (para o gráfico)
-// votos e porcentagem de cada competência (para o gráfico)
-// media = votos da competência ÷ total de votos de TODAS as competências × 100
-// (1 voto no total = 100%; 2 votos em competências diferentes = 50/50...)
 function listarCompetencias() {
     console.log("ACESSEI O PAINEL MODEL \n function listarCompetencias()");
     var instrucaoSql = `
@@ -110,7 +81,7 @@ function listarCompetencias() {
                COALESCE(
                    ROUND(
                        COUNT(uc.fkUsuario) * 100
-                       / NULLIF((SELECT COUNT(*) FROM usuario_competencia), 0),
+                       / NULLIF((SELECT COUNT(DISTINCT fkUsuario) FROM usuario_competencia), 0),
                    1),
                0) AS media
         FROM competencia c
@@ -121,7 +92,6 @@ function listarCompetencias() {
     return database.executar(instrucaoSql);
 }
 
-// quais competências esta pessoa marcou
 function buscarMinhasCompetencias(idUsuario) {
     console.log("ACESSEI O PAINEL MODEL \n function buscarMinhasCompetencias():", idUsuario);
     var instrucaoSql = `
@@ -133,8 +103,6 @@ function buscarMinhasCompetencias(idUsuario) {
     return database.executar(instrucaoSql, [idUsuario]);
 }
 
-// salva (ou troca) as competências: apaga as antigas e grava as novas
-// "nomes" é uma lista assim: ["Comunicação", "Liderança"]
 function enviarCompetencias(idUsuario, nomes) {
     console.log("ACESSEI O PAINEL MODEL \n function enviarCompetencias():", idUsuario, nomes);
 
@@ -151,11 +119,6 @@ function enviarCompetencias(idUsuario, nomes) {
         });
 }
 
-// =========================================================
-// COMENTÁRIO
-// =========================================================
-
-// todos os comentários, do mais novo para o mais antigo
 function listarComentarios() {
     console.log("ACESSEI O PAINEL MODEL \n function listarComentarios()");
     var instrucaoSql = `
@@ -170,7 +133,6 @@ function listarComentarios() {
     return database.executar(instrucaoSql);
 }
 
-// publica o comentário (a tabela só aceita 1 por pessoa)
 function publicarComentario(idUsuario, texto) {
     console.log("ACESSEI O PAINEL MODEL \n function publicarComentario():", idUsuario);
     var instrucaoSql = `
@@ -180,7 +142,6 @@ function publicarComentario(idUsuario, texto) {
     return database.executar(instrucaoSql, [texto, idUsuario]);
 }
 
-// apaga o comentário da pessoa
 function apagarComentario(idUsuario) {
     console.log("ACESSEI O PAINEL MODEL \n function apagarComentario():", idUsuario);
     var instrucaoSql = `

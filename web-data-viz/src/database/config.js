@@ -1,6 +1,5 @@
 var mysql = require("mysql2");
 
-// CONEXÃO DO BANCO MYSQL SERVER
 var mySqlConfig = {
     host: process.env.DB_HOST,
     database: process.env.DB_DATABASE,
@@ -9,8 +8,6 @@ var mySqlConfig = {
     port: process.env.DB_PORT
 };
 
-// "valores" é opcional: é a lista que preenche os "?" da instrução SQL
-// Ex.: executar("SELECT * FROM usuario WHERE idUsuario = ?", [1])
 function executar(instrucao, valores) {
 
     if (valores == undefined) {

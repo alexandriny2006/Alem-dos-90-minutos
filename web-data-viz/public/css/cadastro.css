@@ -77,7 +77,6 @@
     margin: 8px 0 30px;
 }
 
-/* ---------- Campos (dentro de .direita-conteudo) ---------- */
 .direita-conteudo label {
     display: block;
     font-size: 11px;
@@ -106,7 +105,6 @@
     background-color: white;
 }
 
-/* ---------- Botão ---------- */
 .botao-cadastro {
     display: block;
     width: 100%;
@@ -145,7 +143,6 @@
     background-color: rgb(166, 166, 166);
 }
 
-/* ---------- Link "Fazer login" / "Crie uma" ---------- */
 .direita .troca {
     margin: 25px 0 0;
     text-align: center;

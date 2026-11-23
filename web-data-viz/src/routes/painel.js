@@ -3,7 +3,6 @@ var router = express.Router();
 
 var painelController = require("../controllers/painelController");
 
-// ---------- SIGNIFICADO ----------
 router.get("/significados", function (req, res) {
     painelController.listarSignificados(req, res);
 });
@@ -16,7 +15,6 @@ router.post("/significados", function (req, res) {
     painelController.enviarSignificado(req, res);
 });
 
-// ---------- HABILIDADES ----------
 router.get("/habilidades/media", function (req, res) {
     painelController.listarMediaHabilidades(req, res);
 });
@@ -29,7 +27,6 @@ router.post("/habilidades", function (req, res) {
     painelController.salvarHabilidades(req, res);
 });
 
-// ---------- COMPETÊNCIAS ----------
 router.get("/competencias", function (req, res) {
     painelController.listarCompetencias(req, res);
 });
@@ -42,7 +39,6 @@ router.post("/competencias", function (req, res) {
     painelController.enviarCompetencias(req, res);
 });
 
-// ---------- COMENTÁRIO ----------
 router.get("/comentarios", function (req, res) {
     painelController.listarComentarios(req, res);
 });
