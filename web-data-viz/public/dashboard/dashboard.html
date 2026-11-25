@@ -19,6 +19,7 @@
           <li><a href="../index.html">Home</a></li>
           <li><a href="#dashboard">Dashboard</a></li>
         </ul>
+        <span id="nomeUsuario"></span>
       </nav>
     </header>
 
@@ -238,6 +239,8 @@
         window.location = "../login.html";
       }
 
+      nomeUsuario.innerHTML = "Bem-vindo, " +limpar(sessionStorage.NOME_USUARIO);
+      
       var significados = ["Autoconhecimento", "Crescimento profissional", "Propósito", "Conexão com pessoas", "Liberdade"];
       var votosSig = [0, 0, 0, 0, 0];
       var votoIndividualSig = [0, 0, 0, 0, 0];
