@@ -35,12 +35,6 @@
           <h1>Entrar</h1>
           <p>Use o e-mail e a senha do seu cadastro.</p>
 
-          <div class="alerta_erro">
-            <div class="card_erro" id="cardErro" style="display: none">
-              <span id="mensagem_erro"></span>
-            </div>
-          </div>
-
           <label for="email_input">E-mail</label>
           <input
             type="email"
@@ -57,12 +51,18 @@
             placeholder="Sua senha"
           />
 
+          <div class="alerta_erro">
+            <div class="card_erro" id="cardErro" style="display: none">
+              <span id="mensagem_erro"></span>
+            </div>
+          </div>
+
           <button type="button" class="botao-cadastro" onclick="entrar()">
             Entrar
           </button>
 
           <div id="div_aguardar" class="loading-div" style="display: none">
-          Login realizado com sucesso! Redirecionando...
+            <span style="color: green;">Login realizado com sucesso! Redirecionando...</span>
           </div>
 
           <div id="div_erros_login"></div>
@@ -76,21 +76,16 @@
 
     <script>
       function entrar() {
-        aguardar();
-
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
 
         if (emailVar == "" || senhaVar == "") {
           cardErro.style.display = "block";
-          mensagem_erro.innerHTML = "Preencha o e-mail e a senha.";
-          finalizarAguardar();
+          mensagem_erro.innerHTML =
+            "<span style='color: red;'>Preencha o e-mail e a senha.</span>";
           setTimeout(sumirMensagem, 5000);
           return false;
         }
-
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
 
         fetch("/usuarios/autenticar", {
           method: "POST",
@@ -103,39 +98,29 @@
           }),
         })
           .then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!");
-
             if (resposta.ok) {
-              console.log(resposta);
-
               resposta.json().then((json) => {
-                console.log(json);
-                console.log(JSON.stringify(json));
                 sessionStorage.EMAIL_USUARIO = json.email;
                 sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.ID_USUARIO = json.id;
-                sessionStorage.AQUARIOS = JSON.stringify(json.aquarios);
+
+                div_aguardar.style.display = "block";
 
                 setTimeout(function () {
                   window.location = "dashboard/dashboard.html";
-                }, 2500); 
+                }, 2500);
               });
             } else {
-              console.log("Houve um erro ao tentar realizar o login!");
-
               resposta.text().then((texto) => {
-              console.error(texto);
-              finalizarAguardar();
-
-              cardErro.style.display = "block";
-              mensagem_erro.innerHTML = texto;
-              setTimeout(sumirMensagem, 5000);
-            });
+                console.error(texto);
+                cardErro.style.display = "block";
+                mensagem_erro.innerHTML = texto;
+                setTimeout(sumirMensagem, 5000);
+              });
             }
           })
           .catch(function (erro) {
             console.log(erro);
-            finalizarAguardar();
           });
 
         return false;

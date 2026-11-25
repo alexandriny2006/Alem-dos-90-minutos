@@ -42,19 +42,13 @@
           <h1>Cadastre-se</h1>
           <p>Leva menos de um minuto.</p>
 
-          <div class="alerta_erro">
-            <div class="card_erro" id="cardErro" style="display: none">
-              <span id="mensagem_erro"></span>
-            </div>
-          </div>
-
           <div class="formulario">
             <label for="nome_input">Nome</label>
             <input type="text" id="nome_input" placeholder="Digite seu nome" />
 
             <label for="email_input">E-mail</label>
             <input
-              type="text"
+              type="email"
               id="email_input"
               placeholder="seu-email@provedor.com"
             />
@@ -73,13 +67,19 @@
               placeholder="Confirme sua senha"
             />
 
+            <div class="alerta_erro">
+              <div class="card_erro" id="cardErro" style="display: none">
+                <span id="mensagem_erro"></span>
+              </div>
+            </div>
+
             <button type="button" class="botao-cadastro" onclick="cadastrar()">
               Criar conta
             </button>
           </div>
 
           <div id="div_aguardar" class="loading-div" style="display: none">
-          Cadastro realizado com sucesso! Redirecionando...
+            <span style="color: green;">Cadastro realizado com sucesso! Redirecionando...</span>
           </div>
 
           <div id="div_erros_login"></div>
@@ -93,32 +93,44 @@
 
     <script>
       function cadastrar() {
-        aguardar();
-
         var nomeVar = nome_input.value;
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
         var confirmacaoSenhaVar = confirmacao_senha_input.value;
 
-        if (
-          nomeVar == "" ||
-          emailVar == "" ||
-          senhaVar == "" ||
-          confirmacaoSenhaVar == ""
-        ) {
-          cardErro.style.display = "block";
-          mensagem_erro.innerHTML = "Preencha todos os campos.";
+            if (
+        nomeVar == "" ||
+        emailVar == "" ||
+        senhaVar == "" ||
+        confirmacaoSenhaVar == ""
+      ) {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML =
+          "<span style='color: red;'>Preencha todos os campos.</span>";
+        setTimeout(sumirMensagem, 5000);
+        return false;
+      }
 
-          finalizarAguardar();
+      if (emailVar.indexOf("@") == -1) {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML =
+          "<span style='color: red;'>Digite um e-mail válido (precisa ter @).</span>";
+        setTimeout(sumirMensagem, 5000);
+        return false;
+      }
+
+        if (senhaVar != confirmacaoSenhaVar) {
+          cardErro.style.display = "block";
+          mensagem_erro.innerHTML =
+            "<span style='color: red;'>As senhas não são iguais.</span>";
           setTimeout(sumirMensagem, 5000);
           return false;
         }
 
-        if (senhaVar != confirmacaoSenhaVar) {
+        if (senhaVar.length < 6) {
           cardErro.style.display = "block";
-          mensagem_erro.innerHTML = "As senhas não são iguais.";
-
-          finalizarAguardar();
+          mensagem_erro.innerHTML =
+            "<span style='color: red;'>A senha precisa ter no mínimo 6 caracteres.</span>";
           setTimeout(sumirMensagem, 5000);
           return false;
         }
@@ -138,28 +150,23 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-              cardErro.style.display = "block";
-
-              mensagem_erro.innerHTML =
-                "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+              div_aguardar.style.display = "block";
 
               setTimeout(() => {
                 window.location = "login.html";
-              }, "3000");
-
-              finalizarAguardar();
+              }, 3000);
             } else {
               throw "Houve um erro ao tentar realizar o cadastro!";
             }
           })
-          .catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
+          .catch(function (erro) {
+            console.log(`#ERRO: ${erro}`);
 
             cardErro.style.display = "block";
-            mensagem_erro.innerHTML = "Não foi possível cadastrar. Verifique os dados (o e-mail pode já estar em uso).";
+            mensagem_erro.innerHTML =
+              "<span style='color: red;'>Não foi possível cadastrar. Verifique os dados (o e-mail pode já estar em uso).</span>";
             setTimeout(sumirMensagem, 5000);
-            });
+          });
 
         return false;
       }

@@ -77,12 +77,7 @@
             </div>
 
             <div class="acoes">
-              <button
-                class="button"
-                id="sigbutton"
-                type="button"
-                onclick="enviarSignificado()"
-              >
+              <button class="button" id="sigbutton" type="button" onclick="enviarSignificado()">
                 Enviar
               </button>
             </div>
@@ -111,91 +106,35 @@
             <div class="campos">
               <div class="hab">
                 <label for="h0">Velocidade</label>
-                <input
-                  type="number"
-                  id="h0"
-                  min="0"
-                  max="100"
-                  placeholder="0"
-                  oninput="mudouHabilidade()"
-                />
+                <input type="number" id="h0" min="0" max="100" placeholder="0" oninput="mudouHabilidade()"/>
               </div>
               <div class="hab">
                 <label for="h1">Finalização</label>
-                <input
-                  type="number"
-                  id="h1"
-                  min="0"
-                  max="100"
-                  placeholder="0"
-                  oninput="mudouHabilidade()"
-                />
+                <input type="number" id="h1" min="0" max="100" placeholder="0" oninput="mudouHabilidade()"/>
               </div>
               <div class="hab">
                 <label for="h2">Passe</label>
-                <input
-                  type="number"
-                  id="h2"
-                  min="0"
-                  max="100"
-                  placeholder="0"
-                  oninput="mudouHabilidade()"
-                />
+                <input type="number" id="h2" min="0" max="100" placeholder="0" oninput="mudouHabilidade()"/>
               </div>
               <div class="hab">
                 <label for="h3">Drible</label>
-                <input
-                  type="number"
-                  id="h3"
-                  min="0"
-                  max="100"
-                  placeholder="0"
-                  oninput="mudouHabilidade()"
-                />
+                <input type="number" id="h3" min="0" max="100" placeholder="0" oninput="mudouHabilidade()"/>
               </div>
               <div class="hab">
                 <label for="h4">Defesa</label>
-                <input
-                  type="number"
-                  id="h4"
-                  min="0"
-                  max="100"
-                  placeholder="0"
-                  oninput="mudouHabilidade()"
-                />
+                <input type="number" id="h4" min="0" max="100" placeholder="0" oninput="mudouHabilidade()"/>
               </div>
               <div class="hab">
                 <label for="h5">Força</label>
-                <input
-                  type="number"
-                  id="h5"
-                  min="0"
-                  max="100"
-                  placeholder="0"
-                  oninput="mudouHabilidade()"
-                />
+                <input type="number" id="h5" min="0" max="100" placeholder="0" oninput="mudouHabilidade()"/>
               </div>
               <div class="hab">
                 <label for="h6">Visão de jogo</label>
-                <input
-                  type="number"
-                  id="h6"
-                  min="0"
-                  max="100"
-                  placeholder="0"
-                  oninput="mudouHabilidade()"
-                />
+                <input type="number" id="h6" min="0" max="100" placeholder="0" oninput="mudouHabilidade()"/>
               </div>
               <div class="hab">
                 <label for="h7">Resistência</label>
-                <input
-                  type="number"
-                  id="h7"
-                  min="0"
-                  max="100"
-                  placeholder="0"
-                  oninput="mudouHabilidade()"
-                />
+                <input type="number" id="h7" min="0" max="100" placeholder="0" oninput="mudouHabilidade()"/>
               </div>
             </div>
 
@@ -246,12 +185,7 @@
             </div>
 
             <div class="acoes">
-              <button
-                class="button"
-                id="compbutton"
-                type="button"
-                onclick="enviarCompetencias()"
-              >
+              <button class="button" id="compbutton" type="button" onclick="enviarCompetencias()">
                 Enviar
               </button>
             </div>
@@ -272,12 +206,7 @@
         </p>
 
         <div id="cForm">
-          <textarea
-            id="cTexto"
-            maxlength="250"
-            placeholder="Escreva algo sobre a sua experiência…"
-            oninput="contarLetras()"
-          ></textarea>
+          <textarea id="cTexto" maxlength="250" placeholder="Escreva algo sobre a sua experiência…" oninput="contarLetras()"></textarea>
           <div class="cnt">
             <span id="cContador">0/250</span>
             <button class="button" type="button" onclick="publicarComentario()">
@@ -292,11 +221,7 @@
             <button class="button" type="button" onclick="editarComentario()">
               Editar comentário
             </button>
-            <button
-              class="button contorno"
-              type="button"
-              onclick="apagarComentario()"
-            >
+            <button class="button contorno" type="button" onclick="apagarComentario()">
               Apagar comentário
             </button>
           </div>
@@ -306,95 +231,47 @@
       </section>
     </main>
 
-   <script>
-      var significados = [
-        "Autoconhecimento",
-        "Crescimento profissional",
-        "Propósito",
-        "Conexão com pessoas",
-        "Liberdade",
-      ];
+    <script>
+      var idUsuario = sessionStorage.ID_USUARIO;
+
+      if (!idUsuario) {
+        window.location = "../login.html";
+      }
+
+      var significados = ["Autoconhecimento", "Crescimento profissional", "Propósito", "Conexão com pessoas", "Liberdade"];
       var votosSig = [0, 0, 0, 0, 0];
       var votoIndividualSig = [0, 0, 0, 0, 0];
       var meuSig = -1;
 
-      var nomesHab = [
-        "Velocidade",
-        "Finalização",
-        "Passe",
-        "Drible",
-        "Defesa",
-        "Força",
-        "Visão de jogo",
-        "Resistência",
-      ];
+      var nomesHab = ["Velocidade", "Finalização", "Passe", "Drible", "Defesa", "Força", "Visão de jogo", "Resistência"];
       var notas = [0, 0, 0, 0, 0, 0, 0, 0];
 
-      var competencias = [
-        "Comunicação",
-        "Trabalho em equipe",
-        "Liderança",
-        "Resolução de problemas",
-        "Criatividade",
-        "Organização",
-      ];
+      var competencias = ["Comunicação", "Trabalho em equipe", "Liderança", "Resolução de problemas", "Criatividade", "Organização"];
       var votosComp = [0, 0, 0, 0, 0, 0];
       var minhasComp = [false, false, false, false, false, false];
-      var votoIndividualComp = [0, 0, 0, 0, 0, 0];
+
       var comentarios = [];
-      var jaComentei = false;
       var meuTexto = "";
-      var idUsuario = sessionStorage.ID_USUARIO;
 
-      const ctxSig = document.getElementById("sigCanvas");
-
-      var graficoSig = new Chart(ctxSig, {
+      var graficoSig = new Chart(document.getElementById("sigCanvas"), {
         type: "bar",
         data: {
           labels: significados,
           datasets: [
-            {
-              label: "Comunidade",
-              data: votosSig,
-              backgroundColor: "#a9bd7c",
-              borderWidth: 1,
-            },
-            {
-              label: "Seu voto",
-              data: votoIndividualSig,
-              backgroundColor: "#334512",
-              borderWidth: 1,
-            },
+            { label: "Comunidade", data: votosSig, backgroundColor: "#a9bd7c" },
+            { label: "Seu voto", data: votoIndividualSig, backgroundColor: "#334512" },
           ],
         },
         options: {
           maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: true,
-              labels: {
-                color: "black",
-              },
-            },
-          },
           scales: {
-            x: {
-              stacked: true,
-            },
-            y: {
-              stacked: true,
-              beginAtZero: true,
-              ticks: {
-                precision: 0,
-              },
-            },
+            x: { stacked: true },
+            y: { stacked: true, beginAtZero: true, ticks: { precision: 0 } },
           },
         },
       });
 
-      const ctxRadar = document.getElementById("radarCanvas");
-
-      var graficoRadar = new Chart(ctxRadar, {
+      var graficoRadar = new Chart(document.getElementById("radarCanvas"), {
         type: "radar",
         data: {
           labels: nomesHab,
@@ -404,38 +281,20 @@
               data: notas,
               backgroundColor: "rgba(51, 69, 18, 0.35)",
               borderColor: "#334512",
-              pointBackgroundColor: "#334512",
-              borderWidth: 2,
             },
           ],
         },
         options: {
           maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: true,
-              labels: {
-                color: "white",
-              },
-            },
-          },
+          plugins: { legend: { labels: { color: "white" } } },
           scales: {
             r: {
               min: 0,
               max: 100,
-              ticks: {
-                display: false,
-                stepSize: 20,
-              },
-              grid: {
-                color: "rgba(255, 255, 255, 0.2)",
-              },
-              angleLines: {
-                color: "rgba(255, 255, 255, 0.2)",
-              },
-              pointLabels: {
-                color: "white",
-              },
+              ticks: { display: false },
+              grid: { color: "rgba(255, 255, 255, 0.2)" },
+              angleLines: { color: "rgba(255, 255, 255, 0.2)" },
+              pointLabels: { color: "white" },
             },
           },
         },
@@ -448,8 +307,6 @@
           comunidade[meuSig]--;
         }
 
-        graficoSig.data.datasets[0].data = comunidade;
-
         for (var i = 0; i < votoIndividualSig.length; i++) {
           votoIndividualSig[i] = 0;
         }
@@ -458,28 +315,27 @@
           votoIndividualSig[meuSig] = 1;
         }
 
+        graficoSig.data.datasets[0].data = comunidade;
         graficoSig.update();
       }
 
       function atualizarGraficoCompetencias() {
-        var area = document.getElementById("compMedias");
-        area.innerHTML = "";
+        compMedias.innerHTML = "";
 
         for (var i = 0; i < competencias.length; i++) {
-          var percentual = Number(votosComp[i]) || 0;
-          var marcada = minhasComp[i];
-          var item = document.createElement("div");
-          item.className = "comp-media-item";
           var textoMarcada = "Média da comunidade";
-          if (marcada) {
+          if (minhasComp[i]) {
             textoMarcada = "Você marcou esta competência";
           }
+
+          var item = document.createElement("div");
+          item.className = "comp-media-item";
           item.innerHTML =
-            '<div class="comp-media-topo"><strong>' + competencias[i] + '</strong>' +
-            '<span>' + percentual + '%</span></div>' +
-            '<div class="comp-media-barra"><div style="width: ' + percentual + '%"></div></div>' +
-            '<small>' + textoMarcada + '</small>';
-          area.appendChild(item);
+            '<div class="comp-media-topo"><strong>' + competencias[i] + "</strong>" +
+            "<span>" + votosComp[i] + "%</span></div>" +
+            '<div class="comp-media-barra"><div style="width: ' + votosComp[i] + '%"></div></div>' +
+            "<small>" + textoMarcada + "</small>";
+          compMedias.appendChild(item);
         }
       }
 
@@ -501,7 +357,6 @@
         }
 
         var quantas = 0;
-
         for (var j = 0; j < minhasComp.length; j++) {
           if (minhasComp[j]) {
             quantas++;
@@ -523,127 +378,86 @@
       function carregarDashboard() {
         fetch("/painel/significados")
           .then(function (res) {
-            if (!res.ok) {
-              throw new Error("Erro ao buscar significados: " + res.status);
-            }
             return res.json();
           })
           .then(function (dados) {
-            if (!Array.isArray(dados)) {
-              throw new Error("Resposta inesperada de /painel/significados");
-            }
             for (var i = 0; i < significados.length; i++) {
               var item = dados.find(function (registro) {
                 return registro.nome == significados[i];
               });
+              votosSig[i] = 0;
               if (item) {
                 votosSig[i] = Number(item.votos);
-              } else {
-                votosSig[i] = 0;
               }
             }
             atualizarGraficoSignificado();
-          })
-          .catch(function (erro) {
-            console.error(erro);
           });
 
         fetch("/painel/competencias")
           .then(function (res) {
-            if (!res.ok) {
-              throw new Error("Erro ao buscar competências: " + res.status);
-            }
             return res.json();
           })
           .then(function (dados) {
-            if (!Array.isArray(dados)) {
-              throw new Error("Resposta inesperada de /painel/competencias");
-            }
             for (var i = 0; i < competencias.length; i++) {
               var item = dados.find(function (registro) {
                 return registro.nome == competencias[i];
               });
+              votosComp[i] = 0;
               if (item) {
                 votosComp[i] = Number(item.media);
-              } else {
-                votosComp[i] = 0;
               }
             }
             atualizarGraficoCompetencias();
-          })
-          .catch(function (erro) {
-            console.error(erro);
           });
 
-        if (idUsuario) {
-          fetch("/painel/significados/" + idUsuario)
-            .then(function (res) {
-              return res.json();
-            })
-            .then(function (dados) {
-              if (dados.length > 0) {
-                meuSig = significados.indexOf(dados[0].nome);
+        fetch("/painel/significados/" + idUsuario)
+          .then(function (res) {
+            return res.json();
+          })
+          .then(function (dados) {
+            if (dados.length > 0) {
+              meuSig = significados.indexOf(dados[0].nome);
+              document.getElementById("s" + meuSig).checked = true;
+              sigAviso.style.display = "block";
+              atualizarGraficoSignificado();
+            }
+            atualizarKPIs();
+          });
 
-                if (meuSig >= 0) {
-                  document.getElementById("s" + meuSig).checked = true;
-                }
-
-                sigAviso.style.display = "block";
-
-                for (var i = 0; i < votoIndividualSig.length; i++) {
-                  votoIndividualSig[i] = 0;
-                }
-
-                atualizarGraficoSignificado();
-              }
-              atualizarKPIs();
-            });
-
-          fetch("/painel/habilidades/" + idUsuario)
-            .then(function (res) {
-              return res.json();
-            })
-            .then(function (dados) {
-              for (var i = 0; i < nomesHab.length; i++) {
-                var item = dados.find(function (registro) {
-                  return registro.nome == nomesHab[i];
-                });
-                if (item) {
+        fetch("/painel/habilidades/" + idUsuario)
+          .then(function (res) {
+            return res.json();
+          })
+          .then(function (dados) {
+            for (var i = 0; i < nomesHab.length; i++) {
+              var item = dados.find(function (registro) {
+                return registro.nome == nomesHab[i];
+              });
+              notas[i] = 0;
+              document.getElementById("h" + i).value = "";
+              if (item) {
                 notas[i] = Number(item.nivel);
-              } else {
-                notas[i] = 0;
-              }
-                if (item) {
                 document.getElementById("h" + i).value = item.nivel;
-              } else {
-                document.getElementById("h" + i).value = "";
               }
-              }
-              graficoRadar.data.datasets[0].data = notas;
-              graficoRadar.update();
-              atualizarKPIs();
-            });
+            }
+            graficoRadar.update();
+            atualizarKPIs();
+          });
 
-          fetch("/painel/competencias/" + idUsuario)
-            .then(function (res) {
-              return res.json();
-            })
-            .then(function (dados) {
-              for (var i = 0; i < competencias.length; i++) {
-                minhasComp[i] = dados.some(function (registro) {
-                  return registro.nome == competencias[i];
-                });
-                if (minhasComp[i]) {
-                  votoIndividualComp[i] = 1;
-                } else {
-                  votoIndividualComp[i] = 0;
-                }
-                document.getElementById("c" + i).checked = minhasComp[i];
-              }
-              atualizarGraficoCompetencias();
-              atualizarKPIs();
-            });
-        }
+        fetch("/painel/competencias/" + idUsuario)
+          .then(function (res) {
+            return res.json();
+          })
+          .then(function (dados) {
+            for (var i = 0; i < competencias.length; i++) {
+              minhasComp[i] = dados.some(function (registro) {
+                return registro.nome == competencias[i];
+              });
+              document.getElementById("c" + i).checked = minhasComp[i];
+            }
+            atualizarGraficoCompetencias();
+            atualizarKPIs();
+          });
 
         fetch("/painel/comentarios")
           .then(function (res) {
@@ -653,13 +467,11 @@
             comentarios = dados;
 
             for (var i = 0; i < comentarios.length; i++) {
-              if (idUsuario && comentarios[i].idUsuario == idUsuario) {
-                jaComentei = true;
+              if (comentarios[i].idUsuario == idUsuario) {
                 meuTexto = comentarios[i].texto;
                 cForm.style.display = "none";
                 cAviso.style.display = "block";
               }
-              comentarios[i].texto = limpar(comentarios[i].texto);
             }
 
             mostrarComentarios();
@@ -680,16 +492,9 @@
           return;
         }
 
-        if (!idUsuario) {
-          alert("Faça login para enviar seu significado.");
-          return;
-        }
-
         fetch("/painel/significados", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             idUsuarioServer: idUsuario,
             significadoServer: significados[escolhido],
@@ -713,10 +518,6 @@
           var campo = document.getElementById("h" + i);
           var valor = Number(campo.value);
 
-          if (campo.value == "") {
-            valor = 0;
-          }
-
           if (valor > 100) {
             valor = 100;
             campo.value = 100;
@@ -730,31 +531,19 @@
           notas[i] = valor;
         }
 
-        graficoRadar.data.datasets[0].data = notas;
         graficoRadar.update();
         atualizarKPIs();
       }
 
       function salvarHabilidades() {
-        if (!idUsuario) {
-          alert("Faça login para salvar suas habilidades.");
-          return;
-        }
-
         var lista = [];
-
         for (var i = 0; i < nomesHab.length; i++) {
-          lista.push({
-            nome: nomesHab[i],
-            nivel: notas[i],
-          });
+          lista.push({ nome: nomesHab[i], nivel: notas[i] });
         }
 
         fetch("/painel/habilidades", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             idUsuarioServer: idUsuario,
             habilidadesServer: lista,
@@ -786,16 +575,9 @@
           return;
         }
 
-        if (!idUsuario) {
-          alert("Faça login para enviar competências.");
-          return;
-        }
-
         fetch("/painel/competencias", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             idUsuarioServer: idUsuario,
             competenciasServer: selecionadas,
@@ -830,13 +612,9 @@
 
         for (var i = 0; i < comentarios.length; i++) {
           html +=
-            '<div class="cm"><b>' +
-            limpar(comentarios[i].nome) +
-            "</b><small>" +
-            comentarios[i].data +
-            "</small><div>" +
-            limpar(comentarios[i].texto) +
-            "</div></div>";
+            '<div class="cm"><b>' + limpar(comentarios[i].nome) + "</b><small>" +
+            comentarios[i].data + "</small><div>" +
+            limpar(comentarios[i].texto) + "</div></div>";
         }
 
         cLista2.innerHTML = html;
@@ -850,20 +628,9 @@
           return;
         }
 
-        if (jaComentei) {
-          return;
-        }
-
-        if (!idUsuario) {
-          alert("Faça login para publicar um comentário.");
-          return;
-        }
-
         fetch("/painel/comentarios", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             idUsuarioServer: idUsuario,
             textoServer: texto,
@@ -871,12 +638,9 @@
         })
           .then(function (res) {
             if (!res.ok) {
-              throw new Error(
-                "Não foi possível publicar. Talvez você já tenha um comentário."
-              );
+              throw new Error("Não foi possível publicar. Talvez você já tenha um comentário.");
             }
             meuTexto = texto;
-            jaComentei = true;
             cForm.style.display = "none";
             cAviso.style.display = "block";
             carregarDashboard();
@@ -887,13 +651,7 @@
       }
 
       function removerMeuComentario() {
-        if (!idUsuario) {
-          return;
-        }
-
-        fetch("/painel/comentarios/" + idUsuario, {
-          method: "DELETE",
-        })
+        fetch("/painel/comentarios/" + idUsuario, { method: "DELETE" })
           .then(function (res) {
             if (!res.ok) {
               throw new Error("Não foi possível apagar o comentário.");
@@ -901,7 +659,6 @@
             comentarios = comentarios.filter(function (comentario) {
               return comentario.idUsuario != idUsuario;
             });
-            jaComentei = false;
             cForm.style.display = "block";
             cAviso.style.display = "none";
             mostrarComentarios();

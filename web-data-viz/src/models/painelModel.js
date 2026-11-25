@@ -75,20 +75,20 @@ function listarMediaHabilidades() {
 
 function listarCompetencias() {
     console.log("ACESSEI O PAINEL MODEL \n function listarCompetencias()");
+
     var instrucaoSql = `
         SELECT c.nome,
                COUNT(uc.fkUsuario) AS votos,
-               COALESCE(
-                   ROUND(
-                       COUNT(uc.fkUsuario) * 100
-                       / NULLIF((SELECT COUNT(DISTINCT fkUsuario) FROM usuario_competencia), 0),
-                   1),
-               0) AS media
+               ROUND(AVG(uc.fkUsuario IS NOT NULL) * 100, 1) AS media
         FROM competencia c
-        LEFT JOIN usuario_competencia uc ON uc.fkCompetencia = c.idCompetencia
+        JOIN usuario u
+        LEFT JOIN usuario_competencia uc 
+            ON uc.fkUsuario = u.idUsuario
+            AND uc.fkCompetencia = c.idCompetencia
         GROUP BY c.idCompetencia, c.nome
         ORDER BY c.idCompetencia;
     `;
+
     return database.executar(instrucaoSql);
 }
 
