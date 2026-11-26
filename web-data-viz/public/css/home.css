@@ -106,7 +106,9 @@ html {
     /*Faz o efeito de crescimento ao passar o mouse em cima*/
 }
 
-
+.header ul a.ativo::after {
+  width: 100%;
+}
 
 /*TELA 1*/
 
@@ -442,7 +444,7 @@ html {
     justify-content: space-between;
     gap: 40px;
 }
-x
+
 .tela6-marca img {
     display: block;
     height: 60px;

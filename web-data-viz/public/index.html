@@ -22,22 +22,22 @@
             height="70"
           />
         </a>
-        <ul>
+        <ul class="navegacao">
           <span>
-            <a href="#sobre">Sobre o projeto</a>
-          </span>
-          <span>
-            <a href="#impactos">Impactos</a>
-          </span>
-          <span>
-            <a href="#sua-historia">Sua história</a>
-          </span>
-           <span>
-            <a href="#dedicatoria">Dedicatória</a>
-          </span>
-          <span>
-            <a href="login.html">Dashboard</a>
-          </span>
+                <a href="#sobre" id="link-sobre">Sobre o projeto</a>
+              </span>
+              <span>
+                <a href="#impactos" id="link-impactos">Impactos</a>
+              </span>
+              <span>
+                <a href="#sua-historia" id="link-historia">Sua história</a>
+              </span>
+              <span>
+                <a href="#dedicatoria" id="link-dedicatoria">Dedicatória</a>
+              </span>
+              <span>
+                <a href="login.html">Dashboard</a>
+              </span>
         </ul>
         <div>
           <a href="cadastro.html">
@@ -199,7 +199,7 @@
       </div>
     </div>
 
-    <div class="tela5">
+    <div class="tela5" id="dedicatoria">
         <h1 class="tela5-titulo">
           DEDICATÓRIAS
         </h1>
@@ -241,5 +241,25 @@
         <p class="tela6-copy">© 2026 — Alexandriny Miguel</p>
       </div>
     </div>
+    <script>
+        window.onscroll = function () {
+    var posicao = window.scrollY + 150;
+
+    document.getElementById("link-sobre").classList.remove("ativo");
+    document.getElementById("link-impactos").classList.remove("ativo");
+    document.getElementById("link-historia").classList.remove("ativo");
+    document.getElementById("link-dedicatoria").classList.remove("ativo");
+
+    if (posicao >= document.getElementById("dedicatoria").offsetTop) {
+      document.getElementById("link-dedicatoria").classList.add("ativo");
+    } else if (posicao >= document.getElementById("sua-historia").offsetTop) {
+      document.getElementById("link-historia").classList.add("ativo");
+    } else if (posicao >= document.getElementById("impactos").offsetTop) {
+      document.getElementById("link-impactos").classList.add("ativo");
+    } else if (posicao >= document.getElementById("sobre").offsetTop) {
+      document.getElementById("link-sobre").classList.add("ativo");
+    }
+  };
+    </script>
   </body>
 </html>

@@ -232,12 +232,26 @@
       </section>
     </main>
 
+    <div class="tela6" id="dedicatoria">
+      <div class="conteudo-tela6">
+        <div class="tela6-marca">
+          <img
+            src="../assets/logo90.png"
+            alt="Logo Além dos 90 minutos"
+            width="60"
+            height="60"
+          />
+          <p>Futebol, histórias e tudo o que permanece.</p>
+        </div>
+
+       
+        <p class="tela6-copy">© 2026 — Alexandriny Miguel</p>
+      </div>
+    </div>
+
     <script>
       var idUsuario = sessionStorage.ID_USUARIO;
 
-      if (!idUsuario) {
-        window.location = "../login.html";
-      }
 
       nomeUsuario.innerHTML = "Bem-vindo, " +limpar(sessionStorage.NOME_USUARIO);
       
