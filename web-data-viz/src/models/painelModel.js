@@ -3,9 +3,9 @@ var database = require("../database/config");
 function listarSignificados() {
     console.log("ACESSEI O PAINEL MODEL \n function listarSignificados()");
     var instrucaoSql = `
-        SELECT s.nomeSignificado AS nome, COUNT(u.idUsuario) AS votos
+        SELECT s.nomeSignificado AS nome, COUNT(us.fkUsuario) AS votos
         FROM significado s
-        LEFT JOIN usuario u ON u.fkSignificado = s.idSignificado
+        LEFT JOIN usuario_significado us ON us.fkSignificado = s.idSignificado
         GROUP BY s.idSignificado, s.nomeSignificado
         ORDER BY s.idSignificado;
     `;
@@ -16,22 +16,27 @@ function buscarMeuSignificado(idUsuario) {
     console.log("ACESSEI O PAINEL MODEL \n function buscarMeuSignificado():", idUsuario);
     var instrucaoSql = `
         SELECT s.nomeSignificado AS nome
-        FROM usuario u
-        JOIN significado s ON s.idSignificado = u.fkSignificado
-        WHERE u.idUsuario = ?;
+        FROM usuario_significado us
+        JOIN significado s ON s.idSignificado = us.fkSignificado
+        WHERE us.fkUsuario = ?;
     `;
     return database.executar(instrucaoSql, [idUsuario]);
 }
 
 function enviarSignificado(idUsuario, nomeSignificado) {
     console.log("ACESSEI O PAINEL MODEL \n function enviarSignificado():", idUsuario, nomeSignificado);
-    var instrucaoSql = `
-        UPDATE usuario u
-        JOIN significado s ON s.nomeSignificado = ?
-        SET u.fkSignificado = s.idSignificado
-        WHERE u.idUsuario = ?;
-    `;
-    return database.executar(instrucaoSql, [nomeSignificado, idUsuario]);
+
+    return database
+        .executar("DELETE FROM usuario_significado WHERE fkUsuario = ?;", [idUsuario])
+        .then(function () {
+            var instrucaoSql = `
+                INSERT INTO usuario_significado (fkUsuario, fkSignificado)
+                SELECT ?, idSignificado
+                FROM significado
+                WHERE nomeSignificado = ?;
+            `;
+            return database.executar(instrucaoSql, [idUsuario, nomeSignificado]);
+        });
 }
 
 function listarHabilidades(idUsuario) {

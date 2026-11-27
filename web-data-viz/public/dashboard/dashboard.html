@@ -50,30 +50,29 @@
       <section class="panel">
         <h2>O que isso significa para você?</h2>
         <p class="sub">
-          Clique em uma opção e depois em enviar. Cada pessoa vota em apenas
-          um significado, mas você pode trocar quando quiser.
+          Marque uma ou mais opções e depois clique em enviar. Você pode trocar quando quiser.
         </p>
 
         <div class="comp">
           <div>
             <div class="row">
-              <input type="radio" name="significado" id="s0" />
+              <input type="checkbox" name="significado" id="s0" />
               <label for="s0">Autoconhecimento</label>
             </div>
             <div class="row">
-              <input type="radio" name="significado" id="s1" />
+              <input type="checkbox" name="significado" id="s1" />
               <label for="s1">Crescimento profissional</label>
             </div>
             <div class="row">
-              <input type="radio" name="significado" id="s2" />
+              <input type="checkbox" name="significado" id="s2" />
               <label for="s2">Propósito</label>
             </div>
             <div class="row">
-              <input type="radio" name="significado" id="s3" />
+              <input type="checkbox" name="significado" id="s3" />
               <label for="s3">Conexão com pessoas</label>
             </div>
             <div class="row">
-              <input type="radio" name="significado" id="s4" />
+              <input type="checkbox" name="significado" id="s4" />
               <label for="s4">Liberdade</label>
             </div>
 
@@ -249,7 +248,7 @@
       </div>
     </div>
 
-    <script>
+     <script>
       var idUsuario = sessionStorage.ID_USUARIO;
 
 
@@ -258,7 +257,7 @@
       var significados = ["Autoconhecimento", "Crescimento profissional", "Propósito", "Conexão com pessoas", "Liberdade"];
       var votosSig = [0, 0, 0, 0, 0];
       var votoIndividualSig = [0, 0, 0, 0, 0];
-      var meuSig = -1;
+      var minhasSig = [false, false, false, false, false];
 
       var nomesHab = ["Velocidade", "Finalização", "Passe", "Drible", "Defesa", "Força", "Visão de jogo", "Resistência"];
       var notas = [0, 0, 0, 0, 0, 0, 0, 0];
@@ -320,16 +319,15 @@
       function atualizarGraficoSignificado() {
         var comunidade = votosSig.slice();
 
-        if (meuSig >= 0 && comunidade[meuSig] > 0) {
-          comunidade[meuSig]--;
-        }
-
         for (var i = 0; i < votoIndividualSig.length; i++) {
           votoIndividualSig[i] = 0;
-        }
 
-        if (meuSig >= 0) {
-          votoIndividualSig[meuSig] = 1;
+          if (minhasSig[i]) {
+            votoIndividualSig[i] = 1;
+            if (comunidade[i] > 0) {
+              comunidade[i]--;
+            }
+          }
         }
 
         graficoSig.data.datasets[0].data = comunidade;
@@ -383,12 +381,22 @@
         k2.innerHTML = quantas;
         k2s.innerHTML = "de " + competencias.length + " disponíveis";
 
-        if (meuSig == -1) {
+        var escolhidos = "";
+        for (var k = 0; k < minhasSig.length; k++) {
+          if (minhasSig[k]) {
+            if (escolhidos != "") {
+              escolhidos += ", ";
+            }
+            escolhidos += significados[k];
+          }
+        }
+
+        if (escolhidos == "") {
           k3.innerHTML = "–";
           k3s.innerHTML = "Escolha uma opção e envie";
         } else {
-          k3.innerHTML = significados[meuSig];
-          k3s.innerHTML = "O significado que você escolheu";
+          k3.innerHTML = escolhidos;
+          k3s.innerHTML = "O que você escolheu";
         }
       }
 
@@ -432,12 +440,16 @@
             return res.json();
           })
           .then(function (dados) {
-            if (dados.length > 0) {
-              meuSig = significados.indexOf(dados[0].nome);
-              document.getElementById("s" + meuSig).checked = true;
-              sigAviso.style.display = "block";
-              atualizarGraficoSignificado();
+            for (var i = 0; i < significados.length; i++) {
+              minhasSig[i] = dados.some(function (registro) {
+                return registro.nome == significados[i];
+              });
+              document.getElementById("s" + i).checked = minhasSig[i];
             }
+            if (dados.length > 0) {
+              sigAviso.style.display = "block";
+            }
+            atualizarGraficoSignificado();
             atualizarKPIs();
           });
 
@@ -496,16 +508,16 @@
       }
 
       function enviarSignificado() {
-        var escolhido = -1;
+        var selecionados = [];
 
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < significados.length; i++) {
           if (document.getElementById("s" + i).checked) {
-            escolhido = i;
+            selecionados.push(significados[i]);
           }
         }
 
-        if (escolhido == -1) {
-          alert("Escolha uma opção antes de enviar");
+        if (selecionados.length == 0) {
+          alert("Marque pelo menos uma opção antes de enviar");
           return;
         }
 
@@ -514,14 +526,13 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             idUsuarioServer: idUsuario,
-            significadoServer: significados[escolhido],
+            significadosServer: selecionados,
           }),
         })
           .then(function (res) {
             if (!res.ok) {
               throw new Error("Não foi possível salvar o significado.");
             }
-            meuSig = escolhido;
             sigAviso.style.display = "block";
             carregarDashboard();
           })

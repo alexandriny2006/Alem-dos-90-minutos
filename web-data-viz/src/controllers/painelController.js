@@ -41,12 +41,8 @@ function enviarSignificado(req, res) {
         res.status(400).send("O significado está undefined!");
     } else {
         painelModel.enviarSignificado(idUsuario, significado)
-            .then(function (resultado) {
-                if (resultado.affectedRows == 0) {
-                    res.status(404).send("Usuário ou significado não encontrado!");
-                } else {
-                    res.json(resultado);
-                }
+            .then(function (significado) {
+                res.json(significado);
             })
             .catch(function (erro) {
                 responderErro(res, "Houve um erro ao enviar o significado! Erro: ", erro);
