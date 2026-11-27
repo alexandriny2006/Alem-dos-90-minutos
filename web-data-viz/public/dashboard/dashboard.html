@@ -41,8 +41,8 @@
         </div>
 
         <div class="kpi">
-          <div class="num texto" id="k3">–</div>
-          <p>O que isso significa para você</p>
+          <div class="num" id="k3">0</div>
+          <p>Significados que o futebol tem para você</p>
           <small id="k3s"></small>
         </div>
       </section>
@@ -50,29 +50,30 @@
       <section class="panel">
         <h2>O que isso significa para você?</h2>
         <p class="sub">
-          Marque uma ou mais opções e depois clique em enviar. Você pode trocar quando quiser.
+          Marque uma ou mais opções e depois clique em enviar. Você pode trocar
+          quando quiser.
         </p>
 
         <div class="comp">
           <div>
             <div class="row">
-              <input type="checkbox" name="significado" id="s0" />
+              <input type="checkbox" id="s0" />
               <label for="s0">Autoconhecimento</label>
             </div>
             <div class="row">
-              <input type="checkbox" name="significado" id="s1" />
+              <input type="checkbox" id="s1" />
               <label for="s1">Crescimento profissional</label>
             </div>
             <div class="row">
-              <input type="checkbox" name="significado" id="s2" />
+              <input type="checkbox" id="s2" />
               <label for="s2">Propósito</label>
             </div>
             <div class="row">
-              <input type="checkbox" name="significado" id="s3" />
+              <input type="checkbox" id="s3" />
               <label for="s3">Conexão com pessoas</label>
             </div>
             <div class="row">
-              <input type="checkbox" name="significado" id="s4" />
+              <input type="checkbox" id="s4" />
               <label for="s4">Liberdade</label>
             </div>
 
@@ -82,7 +83,7 @@
               </button>
             </div>
             <p class="aviso" id="sigAviso">
-              Voto enviado. Para trocar, escolha outra opção e clique em enviar.
+              Voto enviado. Para trocar, escolha outras opções e clique em enviar.
             </p>
           </div>
 
@@ -248,7 +249,7 @@
       </div>
     </div>
 
-     <script>
+    <script>
       var idUsuario = sessionStorage.ID_USUARIO;
 
 
@@ -381,23 +382,15 @@
         k2.innerHTML = quantas;
         k2s.innerHTML = "de " + competencias.length + " disponíveis";
 
-        var escolhidos = "";
+        var quantasSig = 0;
         for (var k = 0; k < minhasSig.length; k++) {
           if (minhasSig[k]) {
-            if (escolhidos != "") {
-              escolhidos += ", ";
-            }
-            escolhidos += significados[k];
+            quantasSig++;
           }
         }
 
-        if (escolhidos == "") {
-          k3.innerHTML = "–";
-          k3s.innerHTML = "Escolha uma opção e envie";
-        } else {
-          k3.innerHTML = escolhidos;
-          k3s.innerHTML = "O que você escolheu";
-        }
+        k3.innerHTML = quantasSig;
+        k3s.innerHTML = "de " + significados.length + " disponíveis";
       }
 
       function carregarDashboard() {
