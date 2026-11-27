@@ -14,14 +14,11 @@ CREATE TABLE competencia(
   idCompetencia INT PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(45)
 );
-
 CREATE TABLE usuario(
   idUsuario INT PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(25),
   email VARCHAR(50) CONSTRAINT chk_email CHECK (email LIKE '%@%') UNIQUE,
-  senha VARCHAR(30),
-  fkSignificado INT,
-  FOREIGN KEY (fkSignificado) REFERENCES significado(idSignificado)
+  senha VARCHAR(30)
 );
 
 CREATE TABLE habilidade(
@@ -40,6 +37,13 @@ CREATE TABLE comentario(
   FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario)
 );
 
+CREATE TABLE usuario_significado(
+fkUsuario INT,
+fkSignificado INT,
+PRIMARY KEY (fkUsuario, fkSignificado),
+FOREIGN KEY (fkUsuario) REFERENCES usuario (idUsuario),
+FOREIGN KEY (fkSignificado) REFERENCES significado (idSignificado)
+);
 CREATE TABLE usuario_competencia(
   fkUsuario INT,
   fkCompetencia INT,
@@ -48,23 +52,8 @@ CREATE TABLE usuario_competencia(
   FOREIGN KEY (fkCompetencia) REFERENCES competencia(idCompetencia)
 );
 
-INSERT INTO significado (nomeSignificado) VALUES
-  ('Autoconhecimento'),
-  ('Crescimento profissional'),
-  ('Propósito'),
-  ('Conexão com pessoas'),
-  ('Liberdade');
-
-INSERT INTO competencia (nome) VALUES
-  ('Comunicação'),
-  ('Trabalho em equipe'),
-  ('Liderança'),
-  ('Resolução de problemas'),
-  ('Criatividade'),
-  ('Organização');
-
-INSERT INTO usuario (nome, email, senha, fkSignificado) VALUES
-  ('Alexandriny', 'alexandriny@gmail.com', 'senha123', 1);
+INSERT INTO usuario (nome, email, senha) VALUES
+  ('Alexandriny', 'alexandriny@gmail.com', 'Senha@123');
 
 INSERT INTO habilidade (nome, nivel, fkUsuario) VALUES
   ('Velocidade', 75, 1),
@@ -76,28 +65,54 @@ INSERT INTO habilidade (nome, nivel, fkUsuario) VALUES
   ('Visão de jogo', 70, 1),
   ('Resistência', 80, 1);
 
+INSERT INTO significado (nomeSignificado) VALUES
+  ('Autoconhecimento'),
+  ('Crescimento profissional'),
+  ('Propósito'),
+  ('Conexão com pessoas'),
+  ('Liberdade');
+  
+  INSERT INTO competencia (nome) VALUES
+  ('Comunicação'),
+  ('Trabalho em equipe'),
+  ('Liderança'),
+  ('Resolução de problemas'),
+  ('Criatividade'),
+  ('Organização');
+  
 INSERT INTO usuario_competencia (fkUsuario, fkCompetencia) VALUES
-  (1, 1),
-  (1, 2);
+  (1, 1);
+
+  INSERT INTO usuario_significado (fkUsuario, fkSignificado) VALUES
+  (1, 1);
 
 INSERT INTO comentario (texto, data_publicacao, fkUsuario) VALUES
   ('Futebol pra mim vai além dos 90 minutos', '2026-11-18', 1);
-
+  
 SELECT * FROM significado;
 SELECT * FROM competencia;
 SELECT * FROM usuario;
 
-SELECT s.nomeSignificado AS nome, COUNT(u.idUsuario) AS votos
+SELECT s.nomeSignificado AS nome, COUNT(us.fkUsuario) AS votos
 FROM significado s
-LEFT JOIN usuario u ON u.fkSignificado = s.idSignificado
+LEFT JOIN usuario_significado us ON us.fkSignificado = s.idSignificado
 GROUP BY s.idSignificado, s.nomeSignificado
 ORDER BY s.idSignificado;
-
-SELECT idUsuario, nome, email FROM usuario;
-SHOW DATABASES;
 
 SELECT u.idUsuario, u.nome, c.nome AS competencia
 FROM usuario_competencia uc
 JOIN usuario u ON u.idUsuario = uc.fkUsuario
 JOIN competencia c ON c.idCompetencia = uc.fkCompetencia
 ORDER BY u.idUsuario, c.idCompetencia;
+
+
+SELECT c.nome,
+       COUNT(uc.fkUsuario) AS votos,
+       ROUND(AVG(uc.fkUsuario IS NOT NULL) * 100, 1) AS media
+FROM competencia c
+JOIN usuario u
+LEFT JOIN usuario_competencia uc 
+    ON uc.fkUsuario = u.idUsuario
+    AND uc.fkCompetencia = c.idCompetencia
+GROUP BY c.idCompetencia, c.nome
+ORDER BY c.idCompetencia;

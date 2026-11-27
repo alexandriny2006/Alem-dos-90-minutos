@@ -23,8 +23,8 @@ function buscarMeuSignificado(idUsuario) {
     return database.executar(instrucaoSql, [idUsuario]);
 }
 
-function enviarSignificado(idUsuario, nomeSignificado) {
-    console.log("ACESSEI O PAINEL MODEL \n function enviarSignificado():", idUsuario, nomeSignificado);
+function enviarSignificado(idUsuario, nomes) {
+    console.log("ACESSEI O PAINEL MODEL \n function enviarSignificado():", idUsuario, nomes);
 
     return database
         .executar("DELETE FROM usuario_significado WHERE fkUsuario = ?;", [idUsuario])
@@ -33,9 +33,9 @@ function enviarSignificado(idUsuario, nomeSignificado) {
                 INSERT INTO usuario_significado (fkUsuario, fkSignificado)
                 SELECT ?, idSignificado
                 FROM significado
-                WHERE nomeSignificado = ?;
+                WHERE nomeSignificado IN (?);
             `;
-            return database.executar(instrucaoSql, [idUsuario, nomeSignificado]);
+            return database.executar(instrucaoSql, [idUsuario, nomes]);
         });
 }
 

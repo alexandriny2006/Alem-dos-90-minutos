@@ -33,16 +33,16 @@ function buscarMeuSignificado(req, res) {
 
 function enviarSignificado(req, res) {
     var idUsuario = req.body.idUsuarioServer;
-    var significado = req.body.significadoServer;
+    var significados = req.body.significadosServer;
 
     if (idUsuario == undefined) {
         res.status(400).send("O id do usuário está undefined!");
-    } else if (significado == undefined) {
-        res.status(400).send("O significado está undefined!");
+    } else if (!Array.isArray(significados) || significados.length == 0) {
+        res.status(400).send("Escolha pelo menos um significado!");
     } else {
-        painelModel.enviarSignificado(idUsuario, significado)
-            .then(function (significado) {
-                res.json(significado);
+        painelModel.enviarSignificado(idUsuario, significados)
+            .then(function (resultado) {
+                res.json(resultado);
             })
             .catch(function (erro) {
                 responderErro(res, "Houve um erro ao enviar o significado! Erro: ", erro);
